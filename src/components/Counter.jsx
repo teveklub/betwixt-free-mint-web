@@ -2,6 +2,8 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 
+const BP1 = '@media (max-width: 600px)';
+
 const MIN = 60000;
 const HOUR = MIN * 60;
 const DAY = HOUR * 24;
@@ -25,12 +27,18 @@ const sx = {
     },
     counter: {
         p: ' 13px',
-        width: '47px',
-        height: '47px',
+        width: '37px',
+        height: '37px',
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: '#594569'
+        alignItems: 'center',
+        backgroundColor: '#594569',
+        [BP1]:{
+            p: ' 10px',
+            width: '25px',
+            height: '25px',
+        }
     }
 }
 

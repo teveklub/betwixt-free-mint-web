@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material';
+const BP1 = '@media (max-width: 600px)';
 
 const COLORS = {
     primaryColor: '#FFFFFF',
@@ -15,6 +16,10 @@ const theme = createTheme({
             fontWeight: 300,
             fontSize: '64px',
             lineHeight: '77px',
+            [BP1]: {
+                fontSize: '42px',
+                lineHeight: '53px',
+            }
         },
         pageTitleDescription: {
             textAlign: 'center',
@@ -22,14 +27,21 @@ const theme = createTheme({
             fontFamily: 'Jotia-Regular',
             fontSize: '14px',
             lineHeight: '17px',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            [BP1]: {
+                fontSize: '12px',
+                lineHeight: '14px',
+            }
         },
         counterNumber: {
             textAlign: 'center',
             color: COLORS.primaryColor,
             fontFamily: 'Jotia-Regular',
             fontSize: '32px',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            [BP1]: {
+                fontSize: '24px',
+            }
         },
     },
     components: {
@@ -49,6 +61,12 @@ const theme = createTheme({
                     margin: '0 auto',
                     '&:hover': {
                         backgroundColor: COLORS.gray,
+                    },
+                    [BP1]: {
+                        fontSize: '15px',
+                        lineHeight: '22px',
+                        maxWidth: '220px',
+                        padding: '13px',
                     }
                 },
                 orangeFilledButton: {

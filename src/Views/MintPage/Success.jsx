@@ -3,6 +3,8 @@ import { Box } from '@mui/system'
 import React from 'react'
 import Counter from '../../components/Counter'
 
+const BP1 = '@media (max-width: 600px)';
+
 const sx = {
     root: {
         display: 'flex',
@@ -11,21 +13,33 @@ const sx = {
     },
     imageHolder: {
         margin: 'auto',
-        maxWidth: '378px',
-        maxHeight: '378px',
+        width: 'auto',
         my: '27px',
         '& img': {
+            maxWidth: '378px',
+            maxHeight: '378px',
             height: '100%'
+        },
+        [BP1]: {
+            '& img': {
+                maxWidth: '280px',
+                maxHeight: '280px',
+                height: '100%'
+            },
         }
     },
     button: {
-        
+
         mb: '50px'
     },
     comeBackText: {
         fontSize: '20px',
         lineHeight: '24px',
-        mb: '14px'
+        mb: '14px',
+        [BP1]: {
+            fontSize: '16px',
+            lineHeight: '20px',
+        }
     }
 }
 
