@@ -1,12 +1,10 @@
 .center-div {
-  position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     margin: auto;
     width: fit-content;
     height: fit-content;
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
+    height: 100%;
+    display: flex;
 }
