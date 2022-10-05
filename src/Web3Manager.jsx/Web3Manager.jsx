@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import config from '../config/config';
 import Web3Ctx from "../context/Web3Ctx";
 
-
 const { DEPLOYED_NTW_NAME, DEPLOYED_CHAIN_ID, RPC_URL, FORTMATIC_KEY } = config;
-
+export let ethersProviderVar = null;
 const sx = {
     root: {
         display: "flex",
@@ -33,7 +32,6 @@ const Web3Manager = ({ children }) => {
     const [networkName, setNetworkName] = useState(DEPLOYED_NTW_NAME);
     const [initDone, setInitDone] = useState(false);
     const hash = window.location.hash.substr(0, window.location.hash.indexOf('?'));
-
 
     useEffect(() => {
         // console.log('web3 manager mounted');
@@ -100,6 +98,7 @@ const Web3Manager = ({ children }) => {
                                 "any"
                             );
                             setEthersProvider(provider);
+                            ethersProviderVar = provider;
                             window.sessionStorage.setItem("selectedWallet", obWallet.name);
                         } else {
                             console.log("wallet not found, setting default provider");
