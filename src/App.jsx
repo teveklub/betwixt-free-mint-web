@@ -11,7 +11,8 @@ const sx = {
     minHeight: '100vh',
     width: '100%',
     height: '100%',
-    position: 'relative'
+    position: 'relative',
+    display: 'flex'
   }
 }
 

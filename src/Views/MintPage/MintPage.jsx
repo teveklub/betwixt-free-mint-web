@@ -96,8 +96,8 @@ const MintPage = () => {
   };
   return (
     <Box className="center-div" sx={sx.root}>
-      {activeTab > 0 && <Banner style={{ mb: '25px' }} />}
-      <Typography variant="pageTitle" sx={sx.title}>
+      {activeTab > 0 && <Banner style={{ mb: '25px', mt: '-40px'}} />}
+      <Typography variant="pageTitle" sx={{...sx.title, ...(activeTab === 2 && {mt:'-65px'})}}>
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
