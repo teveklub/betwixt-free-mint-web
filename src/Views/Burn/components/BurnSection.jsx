@@ -21,7 +21,7 @@ const METADATA = [
     }
 ]
 const sx = {
-    root:{
+    root: {
         display: 'flex',
         flexDirection: 'column'
     },
@@ -50,20 +50,27 @@ const sx = {
 }
 
 const BurnSection = () => {
-    const [selectedNft, setselectedNft] = useState(undefined)
+    const [selectedNft, setselectedNft] = useState(undefined);
+    const [statusText, setstatusText] = useState('NFT DETECTED')
 
     const selectMeta = (metadata) => {
         setselectedNft(metadata)
+        setstatusText("NFT SELECTECT")
+    }
+
+    const handleBurn = () => {
+        //do something
+        setstatusText("Congrats")
     }
     return (
         <Box sx={sx.root}>
             <Typography variant='pageTitleDescription' sx={sx.text}>
-                {selectedNft ? 'NFT DETECTED' : 'NFT selected'}
+                {statusText}
             </Typography>
 
             <Box sx={sx.contentHolder}>
-                <NtfList metadatas={METADATA} selectMeta={selectMeta}/>
-                <SelectedImageHolder selectedNft={selectedNft} />
+                <NtfList metadatas={METADATA} selectMeta={selectMeta} />
+                <SelectedImageHolder selectedNft={selectedNft} handleBurn={handleBurn}/>
             </Box>
         </Box>
     )

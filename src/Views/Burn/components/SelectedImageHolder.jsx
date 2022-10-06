@@ -18,12 +18,12 @@ const sx = {
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
-        width: '379px',
-        height: '379px',
+        width: '377px',
+        height: '377px',
         border: '1px solid #628BA0'
     }
 }
-const SelectedImageHolder = ({ selectedNft }) => {
+const SelectedImageHolder = ({ selectedNft, handleBurn }) => {
     return (
         <Box sx={sx.root}>
             {selectedNft ?
@@ -37,7 +37,7 @@ const SelectedImageHolder = ({ selectedNft }) => {
                 </Box>
             }
 
-            <Button variant='grayButton' disabled={selectedNft ? false : true}>
+            <Button variant='grayButton' disabled={selectedNft ? false : true} onClick={handleBurn}>
                 BURN
             </Button>
         </Box>
