@@ -8,17 +8,29 @@ import Success from './Success';
 import maskImage from '../../assets/images/mask.jpg';
 import abi from '../../contracts/SaleContract.json';
 const date = new Date('2022-10-05T15:00:00.000Z');
+
+const BP1 = '@media (max-width: 450px)';
+
 const sx = {
   root: {
-    top: 'calc(0px - 207px)',
+   
   },
 
   title: {
     mb: '20px',
+    [BP1]:{
+      mt: '0px !important'
+    }
   },
   subTitle: {
     marginBottom: '100px',
   },
+  bannerMintedPage: {
+    mt:'-45px',
+    [BP1]:{
+      mt: 0
+    }
+  }
 };
 
 const MintPage = () => {
@@ -96,8 +108,8 @@ const MintPage = () => {
   };
   return (
     <Box className="center-div" sx={sx.root}>
-      {activeTab > 0 && <Banner style={{ mb: '25px', mt: '-40px'}} />}
-      <Typography variant="pageTitle" sx={{...sx.title, ...(activeTab === 2 && {mt:'-65px'})}}>
+      {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
+      <Typography variant="pageTitle" sx={{...sx.title, ...(activeTab === 2 && {mt: '-45px'})}}>
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
