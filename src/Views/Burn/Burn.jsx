@@ -6,6 +6,7 @@ import Banner from '../../components/Banner';
 import useWeb3Ctx from '../../hooks/useWeb3Ctx';
 import abi from '../../contracts/SaleContract.json';
 import Counter from '../../components/Counter';
+import BurnSection from './components/BurnSection';
 
 const BP1 = '@media (max-width: 450px)';
 
@@ -61,10 +62,8 @@ const Burn = () => {
 
     useEffect(() => {
         if (address && address !== null) {
-            setButtonText('MINT');
             setActiveTab(1);
         } else {
-            setButtonText('Connect Wallet');
             setActiveTab(0);
         }
     }, [address]);
@@ -75,17 +74,14 @@ const Burn = () => {
                 handleConnect();
                 break;
             case 1:
-                handleMint();
+                handleBurn();
             default:
                 break;
         }
     };
 
-    const handleMint = () => {
-        //something happens here;
-        console.log('Mint');
-        setActiveTab(2);
-        setButtonText('SHARE ON TWITTER');
+    const handleBurn = () => {
+        console.log('burn')
     };
     useEffect(() => {
         // console.log(ethersProviderVar, " ethersProviderVar")
@@ -135,13 +131,20 @@ const Burn = () => {
                         Braves Burn Event
                     </Typography>
                 </Box>
-                <Button variant='grayButton' onClick={handleOnClick} sx={sx.button}>Connect Wallet</Button>
-                <Box sx={sx.counterHolder}>
-                    <Typography variant="pageTitleDescription">
-                        BURN YOUR MASK TO EXPEREINCE THE BETWIXT GAME
-                    </Typography>
-                    <Counter date={DATE} />
-                </Box>
+                {activeTab === 0 &&
+                    <>
+                        <Button variant='grayButton' onClick={handleOnClick} sx={sx.button}>Connect Wallet</Button>
+                        <Box sx={sx.counterHolder}>
+                            <Typography variant="pageTitleDescription">
+                                BURN YOUR MASK TO EXPEREINCE THE BETWIXT GAME
+                            </Typography>
+                            <Counter date={DATE} />
+                        </Box>
+                    </>
+                }
+                {activeTab === 1 &&
+                   <BurnSection />
+                }
             </Box>
         </Box>
     )

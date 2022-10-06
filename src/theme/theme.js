@@ -43,6 +43,16 @@ const theme = createTheme({
                 fontSize: '24px',
             }
         },
+        boxText: {
+            textAlign: 'center',
+            color: COLORS.primaryColor,
+            fontFamily: 'Jotia-Regular',
+            fontSize: '24px',
+            textTransform: 'uppercase',
+            [BP1]: {
+                fontSize: '18px',
+            } 
+        }
     },
     components: {
         MuiButton: {

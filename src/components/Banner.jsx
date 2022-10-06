@@ -4,6 +4,8 @@ import banner from '../assets/images/banner.png'
 
 const sx = {
     root: {
+        maxWidth: '570px',
+        margin: 'auto',
         'img': {
             width: '100%'
         }
