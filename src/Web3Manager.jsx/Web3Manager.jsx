@@ -63,6 +63,7 @@ const Web3Manager = ({ children }) => {
                             rpc: {
                                 1: RPC_URL,
                                 4: RPC_URL,
+                                5: RPC_URL,
                             },
                         },
                         { walletName: "opera" },
