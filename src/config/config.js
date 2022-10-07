@@ -15,8 +15,8 @@ const dev = {
     
     CROSSMINT_CLIENT_ID: '7de2bbab-cec3-456b-a2e1-96bbd99cb8ad',
     CROSSMINT_ENV: 'staging',
-
-    TOKEN_CONTRACT: '0xd420bae071fd52256b149891b305c31ade857e8e'
+    SALE_CONTRACT: '0x0E901AD2f807F10D884cA538bA32C1cD6f4Ac2F1',
+    TOKEN_CONTRACT: '0xc371de84f23e87804e9bdfc89f1f3dab146add0f'
   };
   
   const prod = {
