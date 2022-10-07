@@ -168,14 +168,14 @@
         { "internalType": "uint256", "name": "__saleStart", "type": "uint256" },
         { "internalType": "uint256", "name": "__saleEnd", "type": "uint256" }
       ],
-      "name": "Rinkeby_UpdateSaleConfiguration",
+      "name": "Goerli_UpdateSaleConfiguration",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "Rinkeby_revealAtCurrentSupply",
+      "name": "Goerli_revealAtCurrentSupply",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -188,14 +188,14 @@
           "type": "string"
         }
       ],
-      "name": "Rinkeby_setPreRevealURI",
+      "name": "Goerli_setPreRevealURI",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "Rinkeby_setPresaleIn5",
+      "name": "Goerli_setPresaleIn5",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -208,7 +208,7 @@
           "type": "string"
         }
       ],
-      "name": "Rinkeby_setRevealURI",
+      "name": "Goerli_setRevealURI",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -217,7 +217,7 @@
       "inputs": [
         { "internalType": "address", "name": "_sig", "type": "address" }
       ],
-      "name": "Rinkeby_setSigner",
+      "name": "Goerli_setSigner",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
