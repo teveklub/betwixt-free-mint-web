@@ -42,6 +42,7 @@ const MintPage = () => {
   const { onboard, handleConnect, address, ethersProvider } = useWeb3Ctx();
   const [buttonText, setButtonText] = useState('Connect Wallet');
   const [activeTab, setActiveTab] = useState(0);
+  const [userAlreadyMinted, setUserAlreadyMinted]= useState(false);
   const saleContract = new ethers.Contract(
     config.SALE_CONTRACT,
     saleAbi.abi,
@@ -76,14 +77,13 @@ const MintPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [txEtherScan, setTxEtherScan] = useState('');
-  const [showCheckout, setShowCheckout] = useState(true);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [txInProgress, setTxInProgress] = useState(false);
   const [approveInProgress, setApproveInProgress] = useState(false);
   const [checkoutIsPresale, setCheckoutIsPresale] = useState(true);
   const [isCreditCard, setIsCreditCard] = useState(false);
   const [signature, setSignature] = useState(null);
-
   const [maxTokenPerAddress, setMaxTokenPerAddress] = useState(10);
 
   const [maxDiscountMintable, setMaxDiscountMintable] = useState(10);
@@ -104,6 +104,18 @@ const MintPage = () => {
       setActiveTab(0);
     }
   }, [address]);
+  useEffect(() => {
+    (async () => {
+      const alreadyMintedByWallet = await saleContract
+      ._mintedByWallet(address)
+      .catch((e) => console.log)
+      if(alreadyMintedByWallet.toNumber() > 0){
+        setUserAlreadyMinted(true)
+      }
+      console.log(alreadyMintedByWallet, " setUserAlreadyMinted")
+   })()
+  }, [])
+  
 
   const handleOnClick = () => {
     switch (activeTab) {
@@ -122,6 +134,9 @@ const MintPage = () => {
         break;
     }
   };
+  const handleGoToWallet = () =>{
+    setActiveTab(2);
+  }
 
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
@@ -339,7 +354,7 @@ const MintPage = () => {
     const alreadyMintedByWallet = await saleContract
       ._mintedByWallet(address)
       .catch((e) => console.log);
-      
+      console.log(alreadyMintedByWallet, " alreadyMintedByWallet")
     //console.log('minted by wallet',alreadyMintedByWallet);
 
     if (alreadyMintedByWallet) {
@@ -358,7 +373,14 @@ const MintPage = () => {
     setIsCreditCard(false);
     setShowCheckout(true);
   };
+  const handleReveal = async () =>{
+    const reveal = await saleContract
+    .Goerli_revealAtCurrentSuppl()
+    .catch((e) => console.log('err:', e));
+    if(reveal){
 
+    }
+  }
   const handleMint = async () => {
     setApproveInProgress(true);
     console.log('!!!!!!!max tokens per adddres', maxTokenPerAddress);
@@ -427,10 +449,19 @@ const MintPage = () => {
         handleError(e);
         setTxInProgress(false);
       });
-      console.log(res, "tx sadadasdsadsa")
-      setTxInProgress(false);
-      getSaleInfo();
-      // setTab(1); //-> wallet
+
+      // let resTwo = await tx.getTransactionHash().catch((e) => {
+      //   console.log(e, " errrrrrrrror")
+      //   handleError(e);
+      //   setTxInProgress(false);
+      // });
+      // let receipt = await resTwo.getReceipt();
+      if(res){
+        setTxInProgress(false);
+        getSaleInfo();
+        setActiveTab(2); //-> wallet
+      }
+  
 
       localStorage.setItem('activeTab', 1);
     }
@@ -512,6 +543,12 @@ const MintPage = () => {
           <Button variant="grayButton" onClick={handleOnClick}>
             {buttonText}
           </Button>
+          {
+            userAlreadyMinted && 
+            <Button variant="grayButton" onClick={handleGoToWallet} sx={{marginTop:"30px"}}>
+            Go to Wallet
+          </Button>
+          }
           {showErrorPopup 
           &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
           userParams error
@@ -547,6 +584,7 @@ const MintPage = () => {
       {activeTab === 2 && (
         <Success
           buttonText={buttonText}
+          reveal={handleReveal}
           counterDate={date}
           image={maskImage}
           handleOnclick={handleOnClick}

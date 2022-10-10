@@ -43,7 +43,7 @@ const sx = {
     }
 }
 
-const Success = ({ image, buttonText, counterDate, handleOnclick }) => {
+const Success = ({ image, buttonText, counterDate, handleOnclick,handleReveal }) => {
     return (
         <Box sx={sx.root}>
             <Typography variant='pageTitleDescription' color='#62A077'>Success</Typography>
@@ -51,7 +51,7 @@ const Success = ({ image, buttonText, counterDate, handleOnclick }) => {
                 <img src={image} alt="mask" />
             </Box>
             <Button sx={sx.button} variant='grayButton' onClick={handleOnclick}>{buttonText}</Button>
-
+            <Button sx={sx.button} variant='grayButton' onClick={handleReveal}>{buttonText}</Button>
             <Typography sx={sx.comeBackText} variant="pageTitleDescription"> COME BACK FOR THE BURN EVENT</Typography>
             <Typography variant='pageTitleDescription'> TO EXPEREINCE THE BETWIXT GAME</Typography>
 
