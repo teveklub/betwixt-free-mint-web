@@ -10,30 +10,31 @@ import saleAbi from '../../contracts/SaleContract.json';
 import tokenAbi from '../../contracts/TokenContract.json';
 import config from '../../config/config';
 import Counter from '../../components/Counter';
+import { toast } from 'react-toast';
+import whitelist from "../../whitelist/whitelist.json"
+import CheckoutModal from './CheckoutModal';
 const date = new Date('2022-10-05T15:00:00.000Z');
 
 const BP1 = '@media (max-width: 450px)';
 
 const sx = {
-  root: {
-
-  },
+  root: {},
 
   title: {
     mb: '20px',
     [BP1]: {
-      mt: '0px !important'
-    }
+      mt: '0px !important',
+    },
   },
   subTitle: {
-    marginBottom: '100px',
+    marginBottom: '30px',
   },
   bannerMintedPage: {
     mt: '-45px',
     [BP1]: {
-      mt: 0
-    }
-  }
+      mt: 0,
+    },
+  },
 };
 
 const MintPage = () => {
@@ -93,7 +94,6 @@ const MintPage = () => {
 
   const [signatures, setSignatures] = useState(null);
 
-
   useEffect(() => {
     if (address && address !== null) {
       setButtonText('MINT');
@@ -114,7 +114,7 @@ const MintPage = () => {
           handleDiscountMint();
         }
         if (mainSaleStarted) {
-          handleMint()
+          handleMint();
         }
         break;
       default:
@@ -126,8 +126,8 @@ const MintPage = () => {
     // console.log(ethersProviderVar, " ethersProviderVar")
     (async () => {
       const saleInfo = await getSaleInfo().then((response) => {
-        console.log(response)
-      })
+        console.log(response);
+      });
 
       // const minted = await getMintedByWallet();
       // console.log(minted, ' minted by wallet');
@@ -159,11 +159,10 @@ const MintPage = () => {
   const setPresaleIn = async (signer) => {
     try {
       const minted = await signer.Goerli_setPresaleIn5();
-      console.log(minted, " minted")
+      console.log(minted, ' minted');
       if (minted) {
-
-        const res = await minted.wait().catch((e) => console.log(e, "error"));
-        console.log(res, " res")
+        const res = await minted.wait().catch((e) => console.log(e, 'error'));
+        console.log(res, ' res');
       }
 
       return minted;
@@ -176,25 +175,37 @@ const MintPage = () => {
     if (address) {
       //console.log('SIGNATURES-------',signatures);
 
-      const key = Object.keys(signatures).find(
+      const key = Object.keys(whitelist).find(
         (key) => key.toLowerCase() == address.toLowerCase()
       );
-
+        toast.success(key)
       //console.log('USER KEY', key);
       if (key) {
-        const userParams = signatures[key].params;
+        const userParams = whitelist[key].paramObj;
 
+        // up = {
+        //   params: {
+        //     max_mint: userParams[3],
+        //     receiver: userParams[4],
+        //     valid_from: userParams[5],
+        //     valid_to: userParams[6],
+        //     eth_price: userParams[7],
+        //   },
+        //   raw_params: userParams,
+        //   signature: whitelist[key].signature,
+        // };
         up = {
           params: {
-            max_mint: userParams[3],
-            receiver: userParams[4],
-            valid_from: userParams[5],
-            valid_to: userParams[6],
-            eth_price: userParams[7],
+            max_mint: userParams["max_mint"],
+            receiver: userParams['receiver'],
+            valid_from: userParams['valid_from'],
+            valid_to: userParams['valid_to'],
+            eth_price: userParams['eth_price'],
           },
           raw_params: userParams,
-          signature: signatures[key].signature,
+          signature: whitelist[key].signature,
         };
+        // console.log(up, " up")
       }
     }
     return up;
@@ -205,7 +216,7 @@ const MintPage = () => {
     const info = await saleContract
       .tellEverything()
       .catch((e) => console.log('err:', e));
-    console.log('****info', info)
+    console.log('****info', info);
 
     const totalSupply = await tokenContract.totalSupply();
     //console.log('TS',totalSupply);
@@ -240,10 +251,11 @@ const MintPage = () => {
     /* console.log('current time', now2)
         console.log('block time', now)
         console.log('presale start time', presaleStart)
+        
         console.log('presale end time', presaleEnd)
         console.log('sale start time', saleStart)
         console.log('sale end time', saleEnd) */
-
+    console.log(saleStart, " presale end")
     let presaleIsOver = presaleEnd - now <= 0;
     let saleIsOver = saleEnd - now <= 0;
     let saleIsOn = now >= saleStart && !saleIsOver;
@@ -309,6 +321,7 @@ const MintPage = () => {
   };
 
   const handleDiscountMint = async () => {
+    
     let maxMintable = 0;
 
     //mintInfo =  await saleContract.checkDiscountAvailable(address);
@@ -316,26 +329,28 @@ const MintPage = () => {
     const userParams = getUserParams();
 
     if (!userParams) {
+      
       setShowErrorPopup(true);
       return;
     }
-
+    
     const alreadyMintedByWallet = await saleContract
       ._mintedByWallet(address)
       .catch((e) => console.log);
-
+      
     //console.log('minted by wallet',alreadyMintedByWallet);
 
     if (alreadyMintedByWallet) {
       maxMintable = userParams.params.max_mint - Number(alreadyMintedByWallet);
     }
-
+    
     //console.log('maxMintable', maxMintable);
 
     if (maxMintable < 1) {
-      // toast.error('You have already used up your presale quota.');
+      toast.error('You have already used up your presale quota.');
       return;
     }
+    console.log(maxMintable, " alreadyMintedByWallet");
     setUserMaxDiscountMintable(maxMintable);
     setCheckoutIsPresale(true);
     setIsCreditCard(false);
@@ -371,7 +386,7 @@ const MintPage = () => {
         setShowCheckout(true);
       } else {
         setApproveInProgress(false);
-        // toast.error('You have alredy used up your quota.');
+        toast.error('You have alredy used up your quota.');
       }
     } else {
       setApproveInProgress(false);
@@ -383,7 +398,7 @@ const MintPage = () => {
     let sc = saleContract.connect(ethersProvider.getSigner());
 
     setShowCheckout(false);
-
+    
     setApproveInProgress(true);
 
     let userParams = getUserParams();
@@ -391,15 +406,16 @@ const MintPage = () => {
     if (!userParams) {
       return;
     }
-
+  
     console.log('user PARAMS', userParams);
-
+    toast.success("eljut ")
     let tx = null;
     tx = await sc
       .mint_approved([...userParams.raw_params, userParams.signature], amount, {
         value: ethers.utils.parseEther(price.toString()),
       })
       .catch(handleError);
+   
 
     setApproveInProgress(false);
 
@@ -445,31 +461,81 @@ const MintPage = () => {
   const handleError = (e) => {
     console.error(e);
     if (e.error && e.error.message) {
-      // toast.error(e.error.message);
-      console.log(e.error.message)
+      toast.error(e.error.message);
+      console.log(e.error.message);
     } else if (e.message) {
-      // toast.error(e.message);
-      console.log(e.message)
+      toast.error(e.message);
+      console.log(e.message);
     } else if (e.reason) {
-      // toast.error(e.reason);
-      console.log(e.reason)
+      toast.error(e.reason);
+      console.log(e.reason);
     }
   };
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
-      <Typography variant="pageTitle" sx={{ ...sx.title, ...(activeTab === 2 && { mt: '-45px' }) }}>
+      <Typography
+        variant="pageTitle"
+        sx={{ ...sx.title, ...(activeTab === 2 && { mt: '-45px' }) }}
+      >
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
-        <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+        <Typography variant="pageTitleDescription" sx={{...sx.subTitle, marginBottom:"70px"}}>
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
       )}
       {activeTab < 2 && (
-        <Button variant="grayButton" onClick={handleOnClick}>
-          {buttonText}
-        </Button>
+        <>
+          {preSaleStarted ? (
+            <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+              Presale started
+            </Typography>
+          ) : (
+            <Counter date={presaleTimeCounter} />
+          )}
+          {mainSaleStarted ? (
+            <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+              Main sale started
+            </Typography>
+          ) : (
+            <Box sx={{textAlign:"center"}}>
+              <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+                Main sale starts in :
+              </Typography>
+              <Counter date={saleTimeCounter} />
+              <br/>
+            </Box>
+          )}
+          <Button variant="grayButton" onClick={handleOnClick}>
+            {buttonText}
+          </Button>
+          {showErrorPopup 
+          &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+          userParams error
+        </Typography>
+          }
+          <CheckoutModal
+        tokenName=""
+        isOpen={showCheckout}
+        setOpen={() => {
+          if (!txInProgress && !approveInProgress) {
+            setShowCheckout(false);
+          }
+        }}
+        isPresale={checkoutIsPresale}
+        withCreditCard={isCreditCard}
+        whitelistLimit={
+          checkoutIsPresale
+            ? userMaxDiscountMintable
+            : maxMintableDuringMainSale
+        }
+        salePrice={salePrice}
+        presalePrice={discountPrice}
+        mintSale={mintRegular}
+        mintPresale={mintDisco}
+      />
+        </>
       )}
       {/*<Typography variant="pageTitleDescription" >PResale </Typography>
       <Counter date={presaleTimeCounter} />

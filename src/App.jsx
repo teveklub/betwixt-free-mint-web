@@ -5,7 +5,7 @@ import './App.css';
 import routes from './routes/routes';
 import theme from './theme/theme';
 import Web3Manager from './Web3Manager.jsx/Web3Manager';
-
+import { ToastContainer } from 'react-toast';
 const sx = {
   root: {
     minHeight: '100vh',
@@ -27,6 +27,7 @@ function App() {
                 <Route key={path} path={path} element={component} exact={exact} />
               ))}
             </Routes>
+            <ToastContainer position='bottom-right' delay={4000} />
         </Box>
       </BrowserRouter>
     </Web3Manager>
