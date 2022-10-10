@@ -8,15 +8,15 @@ const BORDER_RADIUS = 7;
 
 const sx = {
   root: {
-    color: "#000",
+    color: "#FFF",
     my: 1,
     "& .MuiButtonGroup-grouped": {
       minWidth: 34,
     },
   },
   input: {
-    fontFamily: "poppins",
-    color: "#000",
+    fontFamily: "Jotia-Regular",
+    color: "#FFF",
     fontSize: 22,
     width: 10,
     minWidth: 20,
@@ -38,8 +38,8 @@ const sx = {
     },
   },
   button: {
-    fontFamily: "poppins",
-    color: "#000",
+    fontFamily: "Jotia-Regular",
+    color: "#FFF",
     border: BORDER_THICKNESS,
     maxHeight: 40,
     fontSize: 16,
@@ -52,7 +52,7 @@ const sx = {
     },
   },
   buttonLeft: {
-    color: "#000",
+    color: "#FFF",
     fontSize: 16,
     border: BORDER_THICKNESS,
     borderTopLeftRadius: BORDER_RADIUS,
@@ -62,14 +62,14 @@ const sx = {
     transition: "all 0.1s ease-in-out",
     "&:hover": {
       color: "#FFF",
-      borderColor: "black",
-      background: "#FF692B",
+      borderColor: "#FFF",
+      background: "#363F59",
       borderWidth: BORDER_THICKNESS,
       borderRight: 0,
     },
   },
   buttonRight: {
-    color: "#000",
+    color: "#FFF",
     border: BORDER_THICKNESS,
     borderTopRightRadius: BORDER_RADIUS,
     borderBottomRightRadius: BORDER_RADIUS,
@@ -77,8 +77,8 @@ const sx = {
     transition: "all 0.1s ease-in-out",
     "&:hover": {
       color: "#FFF",
-      borderColor: "black",
-      background: "#FF692B",
+      borderColor: "#FFF",
+      background: "#363F59",
       borderWidth: BORDER_THICKNESS,
       borderLeft: 0,
     },

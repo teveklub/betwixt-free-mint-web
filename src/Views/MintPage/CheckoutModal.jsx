@@ -12,13 +12,12 @@ const sx = {
     gap: "0 25px",
   },
   title: {
-    fontFamily: "poppins",
-    fontWeight: 700,
     size: 26,
     mb: 1,
   },
   text: {
-    fontFamily: "poppins",
+    fontFamily: "Jotia-Regular",
+    color: '#FFF',
     fontSize: 12,
   },
 };
@@ -40,7 +39,7 @@ const CheckoutModal = ({
   return (
     <PopupModal setOpen={setOpen} isOpen={isOpen} header={headerText}>
       <Box sx={sx.content}>
-        <Typography sx={sx.title}>{tokenName} Token</Typography>
+        <Typography sx={sx.title} variant='share'>{tokenName} Token</Typography>
         <Typography sx={sx.text}>
           Please select the number of NFT you wish to mint.
         </Typography>

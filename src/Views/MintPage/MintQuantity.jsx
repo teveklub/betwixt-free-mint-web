@@ -16,20 +16,22 @@ const sx = {
     mb: 3,
   },
   title: {
-    color: "#000",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 22,
     fontWeight: 700,
     mb: 3,
   },
   text: {
-    fontFamily: "poppins",
+    fontFamily: "Jotia-Regular",
     textTransform: "uppercase",
+    color: '#FFF',
     fontSize: 11,
     alignSelf: "center",
   },
   span: {
-    fontFamily: "poppins",
+    fontFamily: "Jotia-Regular",
+    color: '#FFF',
     textTransform: "none",
     fontWeight: 500,
     fontSize: 11,
@@ -58,40 +60,15 @@ const sx = {
     marginRight: "3px",
     marginBottom: "2px",
   },
-  mintBtn: {
-		height: '35px',
-    width: '100px',
-		borderRadius: '5px',
-		fontWeight: 'bold',
-		whiteSpace: 'nowrap',
-		backgroundColor: 'unset',
-		border: '2px solid #FF692B',
-		color: '#FF692B',
-    marginTop: '15px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-		'&:hover': {
-		  border: '2px solid #FF692B',
-		  backgroundColor: '#FF692B',
-		  color: '#ffffff',
-		},
-		'&:disabled': {
-		  border: '2px solid rgba(0, 0, 0, 0.26);',
-		  
-		},
-		[BP3]: {
-		  width: '100%',
-		  px: '14px',
-		},
-	  },
   priceContainer: {
     display: "flex",
     alignSelf: "center",
     my: 1,
   },
   price: {
+    color: '#FFF',
     pt: "2px",
-    fontFamily: "poppins",
+    fontFamily: "Jotia-Regular",
     fontSize: 22,
   },
 };
@@ -139,8 +116,7 @@ console.log('MINTQUANTYTY', typeof price);
       </Box>
 
       <Button
-        variant="banner"
-        sx={sx.mintBtn}
+        variant="grayButton"
         onClick={() => onClickMint(quantity, totalPrice)}
         disabled={quantity === 0 || quantity>maxAmount }
       >
