@@ -560,14 +560,19 @@ const MintPage = () => {
               <br/>
             </Box>
           )}
-          <Button variant="grayButton" onClick={handleOnClick}>
-            {buttonText}
-          </Button>
-          {
-            userAlreadyMinted && 
-            <Button variant="grayButton" onClick={handleGoToWallet} sx={{marginTop:"30px"}}>
-            Go to Wallet
-          </Button>
+         
+            {activeTab !== 2 &&  <>
+              <Button variant="grayButton" onClick={handleOnClick}>
+                {buttonText}
+              </Button>
+              {
+                userAlreadyMinted && 
+                <Button variant="grayButton" onClick={handleGoToWallet} sx={{marginTop:"30px"}}>
+                Go to Wallet
+              </Button>
+              }
+            
+          </>
           }
           {showErrorPopup 
           &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
@@ -603,11 +608,8 @@ const MintPage = () => {
 
       {activeTab === 2 && (
         <Success
-          buttonText={buttonText}
-          reveal={handleReveal}
           counterDate={date}
           image={maskImage}
-          handleOnclick={handleOnClick}
         />
       )}
       <TxProgressModal isOpen={txInProgress} txEtherScan={txEtherScan} />
