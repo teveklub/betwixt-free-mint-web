@@ -7,16 +7,20 @@ import useWeb3Ctx from '../../hooks/useWeb3Ctx';
 import abi from '../../contracts/SaleContract.json';
 import Counter from '../../components/Counter';
 import BurnSection from './components/BurnSection';
+import PendingBurn from './components/PendingBurn';
+import SuccesBurn from './components/SuccesBurn';
+import Header from '../../components/Header';
 
 const BP1 = '@media (max-width: 450px)';
 
 const sx = {
     root: {
-        heigt: '100%',
-        width: '100%',
+        position: 'relative',
+        minHeight: '100vh',
+        height: '100%',
+        width: '100vw',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
     },
     headerHolder: {
         display: 'flex',
@@ -46,7 +50,9 @@ const sx = {
         flexDirection: 'column',
         alignContent: 'center',
         gap: '30px',
-
+    },
+    pending: {
+        margin: '0 auto'
     }
 };
 const DATE = new Date('2022-10-05T15:00:00.000Z');
@@ -54,6 +60,8 @@ const Burn = () => {
     const { onboard, handleConnect, address, ethersProvider } = useWeb3Ctx();
     const [buttonText, setButtonText] = useState('Connect Wallet');
     const [activeTab, setActiveTab] = useState(0);
+    const [burnPending, setburnPending] = useState(false);
+    const [statusText, setStatusText] = useState(undefined);
     const saleContract = new ethers.Contract(
         '0x6DbD13D198944Bc49B983E146a9dF6bfA871CA13',
         abi.abi,
@@ -63,77 +71,89 @@ const Burn = () => {
     useEffect(() => {
         if (address && address !== null) {
             setActiveTab(1);
+            setStatusText('NFT DETECTED')
         } else {
             setActiveTab(0);
         }
     }, [address]);
 
-    const handleOnClick = () => {
-        switch (activeTab) {
-            case 0:
-                handleConnect();
-                break;
-            case 1:
-                handleBurn();
-            default:
-                break;
-        }
-    };
 
-    const handleBurn = () => {
-        console.log('burn')
-    };
-    useEffect(() => {
-        // console.log(ethersProviderVar, " ethersProviderVar")
-        (async () => {
-            const minted = await getMintedByWallet();
-            console.log(minted, ' minted by wallet');
-            const signer = saleContract.connect(ethersProvider.getSigner());
-            console.log(signer, " signer")
-            const presaleIn5 = await setPresaleIn(signer);
-            console.log(presaleIn5, " presaleIn5")
-        })();
-    }, []);
-
-    const getMintedByWallet = async () => {
+    const signMessage = async (message) => {
         try {
-            const minted = await saleContract.checkSaleIsActive();
-            return minted;
-        } catch (error) {
-            throw Error(error);
-        }
-    };
-    const setPresaleIn = async (signer) => {
-        try {
-            const minted = await signer.Rinkeby_setPresaleIn5();
-            console.log(minted, " minted")
-            if (minted) {
-
-                const res = await minted.wait().catch((e) => console.log(e, "error"));
-                console.log(res, " res")
+            console.log(message)
+            if (!window.ethereum) {
+                throw new Error('No crypto wallet found');
             }
+            await window.ethereum.send("eth_requestAccounts");
+            const signer = ethersProvider.getSigner();
+            const signature = await signer.signMessage(message)
+            const address = await signer.getAddress();
 
-            return minted;
+            return {
+                message, signature, address
+            }
         } catch (error) {
-            throw Error(error);
+            console.log(error)
         }
-    };
+    }
+    const handleSubmit = (selectedNft) => {
+        setburnPending(true)
+        console.log(selectedNft);
+        setActiveTab(2);
+        // let dna = selectedNft;
 
+        // signMessage(`{tokenID: ${selectedNft.tokenId}},  reforged_dna: ${dna}`).then((response) => {
+        //     if (response) {
+        //         console.log(response);
+        //         let obj = {
+        //             "address": response.address,
+        //             // "message": {
+        //             //     "tokenID": ctx.card.tokenId,
+        //             //     "reforged_dna": dna
+        //             // },
+        //             "message": `{tokenID: ${ctx.card.tokenId}},  reforged_dna: ${dna}`,
+        //             "signature": response.signature
+        //         }
+        //         console.log(obj)
+        //         // postForge(obj).then(() => {
+        //         //     setForgePending(true)
 
+        //         // }).catch((e) => { console.log(e) })
+        //     }
+        // })
+    }
+    useEffect(() => {
+        let timer = null;
+        if (burnPending) {
+            timer = setInterval(() => {
+                // axios.get(`https://god-panels-metadata-staging.herokuapp.com/api/reforge/${ctx.card.tokenId}/status`)
+                //     .then((response) => {
+                //         if (response.data.reforgeStatus === 'completed') {
+                //             setOpenCongratulationModal(true);
+                //             setForgePending(false)
+                //         }
+                //     })
+                setActiveTab(3);
+                setStatusText(undefined)
+            }, 2000);
+        } else return;
+        return () => clearInterval(timer);
+    }, [burnPending])
 
 
     return (
-        <Box className="center-div" >
-            <Box sx={sx.root}>
-                <Box sx={sx.headerHolder}>
+        <Box className="center-div">
+            <Box sx={sx.root} >
+                {/* <Box sx={sx.headerHolder}>
                     <Banner style={sx.bannerMintedPage} />
                     <Typography variant="pageTitle" sx={{ ...sx.title }}>
                         Braves Burn Event
                     </Typography>
-                </Box>
+                </Box> */}
+                <Header statusText={statusText}/>
                 {activeTab === 0 &&
                     <>
-                        <Button variant='grayButton' onClick={handleOnClick} sx={sx.button}>Connect Wallet</Button>
+                        <Button variant='grayButton' onClick={handleConnect} sx={sx.button}>Connect Wallet</Button>
                         <Box sx={sx.counterHolder}>
                             <Typography variant="pageTitleDescription">
                                 BURN YOUR MASK TO EXPEREINCE THE BETWIXT GAME
@@ -143,8 +163,10 @@ const Burn = () => {
                     </>
                 }
                 {activeTab === 1 &&
-                   <BurnSection />
+                    <BurnSection handleSubmit={handleSubmit} setStatusText={setStatusText}/>
                 }
+                {activeTab === 2 && <PendingBurn />}
+                {activeTab === 3 && <SuccesBurn />}
             </Box>
         </Box>
     )

@@ -52,6 +52,17 @@ const theme = createTheme({
             [BP1]: {
                 fontSize: '18px',
             } 
+        },
+        share: {
+            textAlign: 'center',
+            color: COLORS.primaryColor,
+            fontFamily: 'Jotia-Regular',
+            fontSize: '16px',
+            textTransform: 'uppercase',
+            cursor: 'pointer',
+            [BP1]: {
+                fontSize: '14px',
+            } 
         }
     },
     components: {
