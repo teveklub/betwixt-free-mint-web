@@ -13,6 +13,7 @@ import Counter from '../../components/Counter';
 import { toast } from 'react-toast';
 import whitelist from "../../whitelist/whitelist.json"
 import CheckoutModal from './CheckoutModal';
+import TxProgressModal from './TxProgressModal';
 const date = new Date('2022-10-05T15:00:00.000Z');
 
 const BP1 = '@media (max-width: 450px)';
@@ -182,6 +183,7 @@ const MintPage = () => {
       //console.log('USER KEY', key);
       if (key) {
         const userParams = whitelist[key].paramObj;
+        const userParamsRaw = whitelist[key].params;
 
         // up = {
         //   params: {
@@ -202,7 +204,7 @@ const MintPage = () => {
             valid_to: userParams['valid_to'],
             eth_price: userParams['eth_price'],
           },
-          raw_params: userParams,
+          raw_params: userParamsRaw,
           signature: whitelist[key].signature,
         };
         // console.log(up, " up")
@@ -406,14 +408,12 @@ const MintPage = () => {
     if (!userParams) {
       return;
     }
-  
-    console.log('user PARAMS', userParams);
-    toast.success("eljut ")
     let tx = null;
+
     tx = await sc
-      .mint_approved([...userParams.raw_params, userParams.signature], amount, {
-        value: ethers.utils.parseEther(price.toString()),
-      })
+    .mint_approved([...userParams.raw_params, userParams.signature], amount, {
+      value:amount,
+    })
       .catch(handleError);
    
 
@@ -422,10 +422,12 @@ const MintPage = () => {
     if (tx) {
       setTxEtherScan(`${config.ETHERSCAN_URL}/tx/${tx.hash}`);
       setTxInProgress(true);
-      await tx.wait().catch((e) => {
+      let res = await tx.wait().catch((e) => {
+        console.log(e, " errrrrrrrror")
         handleError(e);
         setTxInProgress(false);
       });
+      console.log(res, "tx sadadasdsadsa")
       setTxInProgress(false);
       getSaleInfo();
       // setTab(1); //-> wallet
@@ -550,6 +552,7 @@ const MintPage = () => {
           handleOnclick={handleOnClick}
         />
       )}
+      <TxProgressModal isOpen={txInProgress} txEtherScan={txEtherScan} />
     </Box>
   );
 };
