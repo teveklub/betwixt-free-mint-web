@@ -1,6 +1,8 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
+
+const BP1 = '@media (max-width: 450px)';
 const sx = {
     root: {
         display: 'flex',
@@ -11,6 +13,10 @@ const sx = {
         '& img':{
             width: '379px',
             height: '379px',
+        [BP1]:{
+            width: '250px',
+            height: '250px',
+        }
         }
     },
     placeholder:{
@@ -20,7 +26,11 @@ const sx = {
         alignContent: 'center',
         width: '377px',
         height: '377px',
-        border: '1px solid #628BA0'
+        border: '1px solid #628BA0',
+        [BP1]:{
+            width: '250px',
+            height: '250px',
+        }
     }
 }
 const SelectedImageHolder = ({ selectedNft, handleBurn }) => {
