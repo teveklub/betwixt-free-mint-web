@@ -6,8 +6,8 @@ import Banner from '../../components/Banner';
 import useWeb3Ctx from '../../hooks/useWeb3Ctx';
 import Success from './Success';
 import maskImage from '../../assets/images/mask.jpg';
-import saleAbi from '../../contracts/SaleContract.json'; 
-import tokenAbi from '../../contracts/TokenContract.json'; 
+import saleAbi from '../../contracts/SaleContract.json';
+import tokenAbi from '../../contracts/TokenContract.json';
 import config from '../../config/config';
 import Counter from '../../components/Counter';
 const date = new Date('2022-10-05T15:00:00.000Z');
@@ -16,12 +16,12 @@ const BP1 = '@media (max-width: 450px)';
 
 const sx = {
   root: {
-   
+
   },
 
   title: {
     mb: '20px',
-    [BP1]:{
+    [BP1]: {
       mt: '0px !important'
     }
   },
@@ -29,8 +29,8 @@ const sx = {
     marginBottom: '100px',
   },
   bannerMintedPage: {
-    mt:'-45px',
-    [BP1]:{
+    mt: '-45px',
+    [BP1]: {
       mt: 0
     }
   }
@@ -110,7 +110,13 @@ const MintPage = () => {
         handleConnect();
         break;
       case 1:
-        handleMint();
+        if (preSaleStarted) {
+          handleDiscountMint();
+        }
+        if (mainSaleStarted) {
+          handleMint()
+        }
+        break;
       default:
         break;
     }
@@ -119,10 +125,10 @@ const MintPage = () => {
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
     (async () => {
-      const saleInfo = await getSaleInfo().then((response)=> {
+      const saleInfo = await getSaleInfo().then((response) => {
         console.log(response)
       })
-      
+
       // const minted = await getMintedByWallet();
       // console.log(minted, ' minted by wallet');
       // const presaleStart = await checkPresaleActive();
@@ -154,8 +160,8 @@ const MintPage = () => {
     try {
       const minted = await signer.Goerli_setPresaleIn5();
       console.log(minted, " minted")
-      if (minted){
-        
+      if (minted) {
+
         const res = await minted.wait().catch((e) => console.log(e, "error"));
         console.log(res, " res")
       }
@@ -212,10 +218,10 @@ const MintPage = () => {
     const fullPrice = info.config.fullPrice;
 
     /* const maxTokens = Number(info.maxTokens);
-		const userMinted = Number(info.userMinted);
+    const userMinted = Number(info.userMinted);
 
-		const presaleIsActive = info.presaleIsActive;
-		const saleIsActive = info.saleIsActive; */
+    const presaleIsActive = info.presaleIsActive;
+    const saleIsActive = info.saleIsActive; */
 
     setMaxDiscountMintable(Number(info.config.maxPresalePerAddress));
     setMaxTokenPerAddress(Number(info.config.maxSalePerAddress));
@@ -232,11 +238,11 @@ const MintPage = () => {
     //let now = Number(await saleContract.getBlockTimestamp());
 
     /* console.log('current time', now2)
-				console.log('block time', now)
-				console.log('presale start time', presaleStart)
-				console.log('presale end time', presaleEnd)
-				console.log('sale start time', saleStart)
-				console.log('sale end time', saleEnd) */
+        console.log('block time', now)
+        console.log('presale start time', presaleStart)
+        console.log('presale end time', presaleEnd)
+        console.log('sale start time', saleStart)
+        console.log('sale end time', saleEnd) */
 
     let presaleIsOver = presaleEnd - now <= 0;
     let saleIsOver = saleEnd - now <= 0;
@@ -251,12 +257,12 @@ const MintPage = () => {
     //console.log('USER IS EC HOLDER', ecHolder);
 
     /* 	if (ecHolder) {
-			_discountPrice = ethers.BigNumber.from(ecHolder.params.eth_price); //info.discountPrice;
-			setUserIsEcHolder(true);
-			console.log('USER IS EC HOLDER2', ecHolder);
-		} else {
-			setUserIsEcHolder(false);
-		} */
+      _discountPrice = ethers.BigNumber.from(ecHolder.params.eth_price); //info.discountPrice;
+      setUserIsEcHolder(true);
+      console.log('USER IS EC HOLDER2', ecHolder);
+    } else {
+      setUserIsEcHolder(false);
+    } */
 
     setDiscountPrice(ethers.utils.formatEther(_discountPrice));
     setSalePrice(ethers.utils.formatEther(fullPrice));
@@ -264,8 +270,8 @@ const MintPage = () => {
     setPreSaleStarted(presaleIsOn);
     setPreSaleFinished(presaleIsOver);
     /* 
-		setPreSaleStarted(true);
-		setPreSaleFinished(true); */
+    setPreSaleStarted(true);
+    setPreSaleFinished(true); */
 
     setMainSaleStarted(saleIsOn);
     setMainSaleFinished(saleIsOver);
@@ -273,9 +279,9 @@ const MintPage = () => {
     //console.log(presaleStart,presaleEnd,saleStart,saleEnd,maxTokens,fullPrice,discountPrice,userMinted);
 
     /* 	console.log('presaleIsOver',presaleIsOver,presaleEnd-now);
-				console.log('saleIsOver',saleIsOver,saleEnd-now);
-				console.log('presaleIsOn',presaleIsOn,now>=presaleStart,presaleIsOver);
-				console.log('saleIsOn',saleIsOn,now>=saleStart, !saleIsOver); */
+        console.log('saleIsOver',saleIsOver,saleEnd-now);
+        console.log('presaleIsOn',presaleIsOn,now>=presaleStart,presaleIsOver);
+        console.log('saleIsOn',saleIsOn,now>=saleStart, !saleIsOver); */
 
     setPresaleStartTime(new Date(presaleStart * 1000));
     setPresaleEndTime(new Date(presaleEnd * 1000));
@@ -355,8 +361,8 @@ const MintPage = () => {
         );
 
         /* 	if (userIsEcHolder) {
-					setUserMaxDiscountMintable(maxMintableMainSale < maxMintPerTransaction ? maxMintableMainSale : maxMintPerTransaction);
-				} */
+          setUserMaxDiscountMintable(maxMintableMainSale < maxMintPerTransaction ? maxMintableMainSale : maxMintPerTransaction);
+        } */
 
         //	setCheckoutIsPresale(userIsEcHolder);//!!! ec holder hack. it should be false otherwise
         setCheckoutIsPresale(false);
@@ -412,7 +418,7 @@ const MintPage = () => {
     }
   };
 
- const mintRegular = async (amount, price) => {
+  const mintRegular = async (amount, price) => {
     console.log(amount * price);
     let sc = saleContract.connect(ethersProvider.getSigner());
 
@@ -452,7 +458,7 @@ const MintPage = () => {
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
-      <Typography variant="pageTitle" sx={{...sx.title, ...(activeTab === 2 && {mt: '-45px'})}}>
+      <Typography variant="pageTitle" sx={{ ...sx.title, ...(activeTab === 2 && { mt: '-45px' }) }}>
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
@@ -465,10 +471,10 @@ const MintPage = () => {
           {buttonText}
         </Button>
       )}
-          <Typography variant="pageTitleDescription" >PResale </Typography>
-        <Counter date={presaleTimeCounter}/> 
-        <Typography variant="pageTitleDescription" >Sale </Typography>
-        <Counter date={saleTimeCounter}/> 
+      {/*<Typography variant="pageTitleDescription" >PResale </Typography>
+      <Counter date={presaleTimeCounter} />
+       <Typography variant="pageTitleDescription" >Sale </Typography>
+      <Counter date={saleTimeCounter} /> */}
 
       {activeTab === 2 && (
         <Success
