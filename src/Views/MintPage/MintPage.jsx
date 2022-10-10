@@ -41,7 +41,7 @@ const sx = {
 const MintPage = () => {
   const { onboard, handleConnect, address, ethersProvider } = useWeb3Ctx();
   const [buttonText, setButtonText] = useState('Connect Wallet');
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(0);
   const [userAlreadyMinted, setUserAlreadyMinted]= useState(false);
   const saleContract = new ethers.Contract(
     config.SALE_CONTRACT,
