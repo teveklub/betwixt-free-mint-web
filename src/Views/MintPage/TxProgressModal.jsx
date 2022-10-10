@@ -3,12 +3,13 @@ import { Typography, Modal, Box } from "@mui/material";
 import { SpinnerCircularFixed as Spinner } from "spinners-react";
 import Divider from "./Divider";
 import PopupModal from "./PopupModal";
+import './Spinner.css'
 
 const sx = {
   root: {
     width: "100%",
     height: "100%",
-    background: "#fff",
+    background: "transparent",
     display: "flex",
     flexDirection: "column",
     // justifyContent: "center",
@@ -18,7 +19,7 @@ const sx = {
   },
   title: {
     textAlign: "center",
-    color: "#FF692B",
+    color: "#FFF",
     lineHeight:"30px"
   },
   url: {
@@ -32,10 +33,10 @@ const TxProgressModal = ({ isOpen, txEtherScan }) => {
   return (
     <PopupModal isOpen={isOpen} isTxPopup={true}>  
       <Box sx={sx.root}>
-        <Typography variant="heading" sx={sx.title}>
+        <Typography variant="boxText" sx={sx.title}>
           Transaction<br/> In Progress
         </Typography>
-        <Typography variant="text" sx={{ my: 4 }}>
+        <Typography variant="text" sx={{ my: 4 , color: '#FFF'}}>
         Please wait while your transaction is being processed. <br />
           {txEtherScan && (
             <>
