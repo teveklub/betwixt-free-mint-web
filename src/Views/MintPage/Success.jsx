@@ -1,6 +1,7 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
+import { toast } from 'react-toast';
 import Counter from '../../components/Counter'
 
 const BP1 = '@media (max-width: 600px)';
@@ -43,15 +44,20 @@ const sx = {
     }
 }
 
-const Success = ({ image, buttonText, counterDate, handleOnclick,handleReveal }) => {
+const Success = ({ image, counterDate, 
+    // handleOnclick,handleReveal
+ }) => {
+    const shareOnTwitter = () => {
+        toast.success('Share on Twitter');
+    }
     return (
         <Box sx={sx.root}>
             <Typography variant='pageTitleDescription' color='#62A077'>Success</Typography>
             <Box sx={sx.imageHolder}>
                 <img src={image} alt="mask" />
             </Box>
-            <Button sx={sx.button} variant='grayButton' onClick={handleOnclick}>{buttonText}</Button>
-            <Button sx={sx.button} variant='grayButton' onClick={handleReveal}>{buttonText}</Button>
+            <Button sx={sx.button} variant='grayButton' onClick={shareOnTwitter}>Share on Twitter</Button>
+            {/* <Button sx={sx.button} variant='grayButton' onClick={handleReveal}>{buttonText}</Button> */}
             <Typography sx={sx.comeBackText} variant="pageTitleDescription"> COME BACK FOR THE BURN EVENT</Typography>
             <Typography variant='pageTitleDescription'> TO EXPEREINCE THE BETWIXT GAME</Typography>
 
