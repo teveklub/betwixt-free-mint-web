@@ -165,6 +165,34 @@ const MintPage = () => {
       throw Error(error);
     }
   };
+  const getUserParams = () => {
+    let up = null;
+    if (address) {
+      //console.log('SIGNATURES-------',signatures);
+
+      const key = Object.keys(signatures).find(
+        (key) => key.toLowerCase() == address.toLowerCase()
+      );
+
+      //console.log('USER KEY', key);
+      if (key) {
+        const userParams = signatures[key].params;
+
+        up = {
+          params: {
+            max_mint: userParams[3],
+            receiver: userParams[4],
+            valid_from: userParams[5],
+            valid_to: userParams[6],
+            eth_price: userParams[7],
+          },
+          raw_params: userParams,
+          signature: signatures[key].signature,
+        };
+      }
+    }
+    return up;
+  };
   const getSaleInfo = async () => {
     //console.log('saleInfo',saleContract);
     setIsLoading(true);
@@ -299,7 +327,7 @@ const MintPage = () => {
     //console.log('maxMintable', maxMintable);
 
     if (maxMintable < 1) {
-      toast.error('You have already used up your presale quota.');
+      // toast.error('You have already used up your presale quota.');
       return;
     }
     setUserMaxDiscountMintable(maxMintable);
@@ -337,7 +365,7 @@ const MintPage = () => {
         setShowCheckout(true);
       } else {
         setApproveInProgress(false);
-        toast.error('You have alredy used up your quota.');
+        // toast.error('You have alredy used up your quota.');
       }
     } else {
       setApproveInProgress(false);
@@ -378,7 +406,7 @@ const MintPage = () => {
       });
       setTxInProgress(false);
       getSaleInfo();
-      setTab(1); //-> wallet
+      // setTab(1); //-> wallet
 
       localStorage.setItem('activeTab', 1);
     }
@@ -404,11 +432,23 @@ const MintPage = () => {
       });
       setTxInProgress(false);
       getSaleInfo();
-      setTab(1); //-> wallet
+      // setTab(1); //-> wallet
       localStorage.setItem('activeTab', 1);
     }
   };
-
+  const handleError = (e) => {
+    console.error(e);
+    if (e.error && e.error.message) {
+      // toast.error(e.error.message);
+      console.log(e.error.message)
+    } else if (e.message) {
+      // toast.error(e.message);
+      console.log(e.message)
+    } else if (e.reason) {
+      // toast.error(e.reason);
+      console.log(e.reason)
+    }
+  };
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
