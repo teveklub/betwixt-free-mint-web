@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Modal } from '@mui/material';
+import { Box, Modal, Typography } from '@mui/material';
 
 const BP1 = '@media (max-width: 899px)';
 const BP2 = '@media (max-width: 719px)';
@@ -9,7 +9,7 @@ const BP3 = '@media (max-width: 600px)';
 const sx = {
   root: {
     height: '100%',
-    backgroundColor: 'rgba(255,255,255,0.7)',
+    backgroundColor: '#15101999',
     py: '44px',
     px: '125px',
     position: 'relative',
@@ -31,10 +31,10 @@ const sx = {
     width: '100%',
     maxWidth: '500px',
     borderRadius: '16px',
-    border: '1px solid #050000',
+    border: '1px solid #628BA0',
     overflow: 'hidden',
     transition: 'all .3s',
-    backgroundColor: '#FFF',
+    backgroundColor: '#1E1E1E',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -59,6 +59,7 @@ const sx = {
     cursor: 'pointer',
     pointerEvents: 'auto',
     transition: 'all .3s',
+    color: '#FFF',
     '&:hover': {
       opacity: 0.8,
     },
@@ -111,7 +112,7 @@ const PopupModal = ({
               </Box>
             )}
 
-            <h1>{header}</h1>
+            <Typography variant='counterNumber'>{header}</Typography>
           </Box>
           <Box sx={sx.body}>{children}</Box>
           <Box sx={sx.footer}>{footer}</Box>

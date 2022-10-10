@@ -76,7 +76,7 @@ const MintPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [txEtherScan, setTxEtherScan] = useState('');
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(true);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [txInProgress, setTxInProgress] = useState(false);
   const [approveInProgress, setApproveInProgress] = useState(false);
