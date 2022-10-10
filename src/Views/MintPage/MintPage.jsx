@@ -141,6 +141,26 @@ const MintPage = () => {
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
     (async () => {
+      const token = await tokenContract.tokenOfOwnerByIndex(address,0).catch((e)=>{
+        toast.error("error")
+      })
+      if(token){
+        console.log(token, " token")
+      }
+      // const minted = await getMintedByWallet();
+      // console.log(minted, ' minted by wallet');
+      // const presaleStart = await checkPresaleActive();
+      // console.log("presale is active ", presaleStart)
+      // const signer = saleContract.connect(ethersProvider.getSigner());
+      // console.log(signer, " signer")
+      // const presaleIn5 = await setPresaleIn(signer);
+      // console.log(presaleIn5, " presaleIn5")
+    })();
+  }, [activeTab]);
+
+  useEffect(() => {
+    // console.log(ethersProviderVar, " ethersProviderVar")
+    (async () => {
       const saleInfo = await getSaleInfo().then((response) => {
         console.log(response);
       });
