@@ -141,8 +141,11 @@ const MintPage = () => {
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
     (async () => {
+      const balanceOf = await tokenContract.balanceOf(address).catch(e=>toast.error(e.message))
+      console.log(balanceOf.toNumber(), " balance")
+      if (balanceOf < 1) return;
       const token = await tokenContract.tokenOfOwnerByIndex(address,0).catch((e)=>{
-        toast.error("error")
+        toast.error(e.message)
       })
       if(token){
         console.log(token, " token")
@@ -176,36 +179,6 @@ const MintPage = () => {
     })();
   }, []);
 
-  const getMintedByWallet = async () => {
-    try {
-      const minted = await saleContract.checkSaleIsActive();
-      return minted;
-    } catch (error) {
-      throw Error(error);
-    }
-  };
-  const checkPresaleActive = async () => {
-    try {
-      const presaleIsActive = await saleContract.checkPresaleIsActive();
-      return presaleIsActive;
-    } catch (error) {
-      throw Error(error);
-    }
-  };
-  const setPresaleIn = async (signer) => {
-    try {
-      const minted = await signer.Goerli_setPresaleIn5();
-      console.log(minted, ' minted');
-      if (minted) {
-        const res = await minted.wait().catch((e) => console.log(e, 'error'));
-        console.log(res, ' res');
-      }
-
-      return minted;
-    } catch (error) {
-      throw Error(error);
-    }
-  };
   const getUserParams = () => {
     let up = null;
     if (address) {
@@ -214,7 +187,6 @@ const MintPage = () => {
       const key = Object.keys(whitelist).find(
         (key) => key.toLowerCase() == address.toLowerCase()
       );
-        toast.success(key)
       //console.log('USER KEY', key);
       if (key) {
         const userParams = whitelist[key].paramObj;
@@ -366,7 +338,7 @@ const MintPage = () => {
     const userParams = getUserParams();
 
     if (!userParams) {
-      
+      toast.error("Address not found in the whitelist")
       setShowErrorPopup(true);
       return;
     }
@@ -574,11 +546,11 @@ const MintPage = () => {
             
           </>
           }
-          {showErrorPopup 
+          {/* {showErrorPopup 
           &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
           userParams error
         </Typography>
-          }
+          } */}
           <CheckoutModal
         tokenName=""
         isOpen={showCheckout}
