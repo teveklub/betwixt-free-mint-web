@@ -6,13 +6,15 @@ import routes from './routes/routes';
 import theme from './theme/theme';
 import Web3Manager from './Web3Manager.jsx/Web3Manager';
 import { ToastContainer } from 'react-toast';
+import Footer from './components/Footer';
 const sx = {
   root: {
     minHeight: '100vh',
     width: '100%',
     height: '100%',
     position: 'relative',
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'column'
   }
 }
 
@@ -28,6 +30,7 @@ function App() {
               ))}
             </Routes>
             <ToastContainer position='bottom-right' delay={4000} />
+            <Footer />
         </Box>
       </BrowserRouter>
     </Web3Manager>
