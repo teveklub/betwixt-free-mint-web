@@ -9,6 +9,7 @@ import maskImage from '../../assets/images/mask.jpg';
 import saleAbi from '../../contracts/SaleContract.json'; 
 import tokenAbi from '../../contracts/TokenContract.json'; 
 import config from '../../config/config';
+import Counter from '../../components/Counter';
 const date = new Date('2022-10-05T15:00:00.000Z');
 
 const BP1 = '@media (max-width: 450px)';
@@ -115,16 +116,13 @@ const MintPage = () => {
     }
   };
 
-  const handleMint = () => {
-    //something happens here;
-    console.log('Mint');
-    setActiveTab(2);
-    setButtonText('SHARE ON TWITTER');
-  };
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
     (async () => {
-      const saleInfo = getSaleInfo();
+      const saleInfo = await getSaleInfo().then((response)=> {
+        console.log(response)
+      })
+      
       // const minted = await getMintedByWallet();
       // console.log(minted, ' minted by wallet');
       // const presaleStart = await checkPresaleActive();
@@ -173,7 +171,7 @@ const MintPage = () => {
     const info = await saleContract
       .tellEverything()
       .catch((e) => console.log('err:', e));
-    //console.log('****info', info)
+    console.log('****info', info)
 
     const totalSupply = await tokenContract.totalSupply();
     //console.log('TS',totalSupply);
@@ -275,6 +273,142 @@ const MintPage = () => {
     }
     setIsLoading(false);
   };
+
+  const handleDiscountMint = async () => {
+    let maxMintable = 0;
+
+    //mintInfo =  await saleContract.checkDiscountAvailable(address);
+
+    const userParams = getUserParams();
+
+    if (!userParams) {
+      setShowErrorPopup(true);
+      return;
+    }
+
+    const alreadyMintedByWallet = await saleContract
+      ._mintedByWallet(address)
+      .catch((e) => console.log);
+
+    //console.log('minted by wallet',alreadyMintedByWallet);
+
+    if (alreadyMintedByWallet) {
+      maxMintable = userParams.params.max_mint - Number(alreadyMintedByWallet);
+    }
+
+    //console.log('maxMintable', maxMintable);
+
+    if (maxMintable < 1) {
+      toast.error('You have already used up your presale quota.');
+      return;
+    }
+    setUserMaxDiscountMintable(maxMintable);
+    setCheckoutIsPresale(true);
+    setIsCreditCard(false);
+    setShowCheckout(true);
+  };
+
+  const handleMint = async () => {
+    setApproveInProgress(true);
+    console.log('!!!!!!!max tokens per adddres', maxTokenPerAddress);
+    const alreadyMintedByWallet = await saleContract
+      ._mintedByWallet(address)
+      .catch((e) => console.log);
+
+    if (alreadyMintedByWallet) {
+      let maxMintableMainSale =
+        maxTokenPerAddress - Number(alreadyMintedByWallet);
+
+      if (maxMintableMainSale > 0) {
+        setMaxMintableDuringMainSale(
+          maxMintableMainSale < maxMintPerTransaction
+            ? maxMintableMainSale
+            : maxMintPerTransaction
+        );
+
+        /* 	if (userIsEcHolder) {
+					setUserMaxDiscountMintable(maxMintableMainSale < maxMintPerTransaction ? maxMintableMainSale : maxMintPerTransaction);
+				} */
+
+        //	setCheckoutIsPresale(userIsEcHolder);//!!! ec holder hack. it should be false otherwise
+        setCheckoutIsPresale(false);
+        setIsCreditCard(false);
+        setApproveInProgress(false);
+        setShowCheckout(true);
+      } else {
+        setApproveInProgress(false);
+        toast.error('You have alredy used up your quota.');
+      }
+    } else {
+      setApproveInProgress(false);
+      console.log("can't get already minted tokens");
+    }
+  };
+
+  const mintDisco = async (amount, price) => {
+    let sc = saleContract.connect(ethersProvider.getSigner());
+
+    setShowCheckout(false);
+
+    setApproveInProgress(true);
+
+    let userParams = getUserParams();
+
+    if (!userParams) {
+      return;
+    }
+
+    console.log('user PARAMS', userParams);
+
+    let tx = null;
+    tx = await sc
+      .mint_approved([...userParams.raw_params, userParams.signature], amount, {
+        value: ethers.utils.parseEther(price.toString()),
+      })
+      .catch(handleError);
+
+    setApproveInProgress(false);
+
+    if (tx) {
+      setTxEtherScan(`${config.ETHERSCAN_URL}/tx/${tx.hash}`);
+      setTxInProgress(true);
+      await tx.wait().catch((e) => {
+        handleError(e);
+        setTxInProgress(false);
+      });
+      setTxInProgress(false);
+      getSaleInfo();
+      setTab(1); //-> wallet
+
+      localStorage.setItem('activeTab', 1);
+    }
+  };
+
+ const mintRegular = async (amount, price) => {
+    console.log(amount * price);
+    let sc = saleContract.connect(ethersProvider.getSigner());
+
+    setShowCheckout(false);
+    setApproveInProgress(true);
+    const tx = await sc
+      .mint(amount, { value: ethers.utils.parseEther(price.toString()) })
+      .catch(handleError);
+    setApproveInProgress(false);
+
+    if (tx) {
+      setTxEtherScan(`${config.ETHERSCAN_URL}/tx/${tx.hash}`);
+      setTxInProgress(true);
+      await tx.wait().catch((e) => {
+        handleError(e);
+        setTxInProgress(false);
+      });
+      setTxInProgress(false);
+      getSaleInfo();
+      setTab(1); //-> wallet
+      localStorage.setItem('activeTab', 1);
+    }
+  };
+
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
@@ -291,6 +425,10 @@ const MintPage = () => {
           {buttonText}
         </Button>
       )}
+          <Typography variant="pageTitleDescription" >PResale </Typography>
+        <Counter date={presaleTimeCounter}/> 
+        <Typography variant="pageTitleDescription" >Sale </Typography>
+        <Counter date={saleTimeCounter}/> 
 
       {activeTab === 2 && (
         <Success
