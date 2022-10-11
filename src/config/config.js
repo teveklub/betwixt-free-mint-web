@@ -4,7 +4,7 @@ const dev = {
     INFURA_ID: 'cae2aed2f50a4087af91b000cf05be4c',
     FORTMATIC_KEY: 'pk_test_DD2BBA8AAA1D4FED',
     RPC_URL: 'https://goerli.infura.io/v3/cae2aed2f50a4087af91b000cf05be4c',
-    ETHERSCAN_URL: 'https://https://goerli.etherscan.io/',
+    ETHERSCAN_URL: 'https://goerli.etherscan.io/',
     OPENSEA_URL: 'https://testnets.opensea.io/',
     API_URL: 'https://god-panels-metadata-staging.herokuapp.com/api',
     PREVIEW_URL: 'https://ssp-server-v2.herokuapp.com/api/project-session',
