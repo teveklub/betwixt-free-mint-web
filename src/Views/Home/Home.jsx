@@ -18,10 +18,15 @@ const Home = () => {
 
   const handleConnection = () => {
     handleConnect();
-    if (address !== undefined)
-      navigate('/mint');
-
+   
   }
+
+  useEffect(() => {
+    if (address !== undefined && address !== null)
+    navigate('/mint');
+
+  }, [address])
+  
   console.log(address)
   return (
     <Box className='center-div'>
