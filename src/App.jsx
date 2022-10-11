@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import { Box } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes,HashRouter, Router } from 'react-router-dom';
 import './App.css';
 import routes from './routes/routes';
 import theme from './theme/theme';
@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <Web3Manager>
-      <BrowserRouter basename='/'>
+      <HashRouter basename='/'>
         <Box sx={sx.root} color={theme.palette.background}>
             <Routes>
               {routes.map(({ path, component, exact }) => (
@@ -32,7 +32,7 @@ function App() {
             <ToastContainer position='bottom-right' delay={4000} />
             <Footer />
         </Box>
-      </BrowserRouter>
+      </HashRouter>
     </Web3Manager>
   </ThemeProvider>
   );

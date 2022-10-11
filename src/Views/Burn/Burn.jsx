@@ -37,7 +37,6 @@ const sx = {
         marginBottom: '100px',
     },
     bannerMintedPage: {
-        mt: '-45px',
         [BP1]: {
             mt: 0
         }

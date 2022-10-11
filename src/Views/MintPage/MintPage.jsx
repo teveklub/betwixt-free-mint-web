@@ -31,7 +31,7 @@ const sx = {
     marginBottom: '30px',
   },
   bannerMintedPage: {
-    mt: '-45px',
+    // mt: '-45px',
     [BP1]: {
       mt: 0,
     },
@@ -273,6 +273,10 @@ const MintPage = () => {
     let saleIsOver = saleEnd - now <= 0;
     let saleIsOn = now >= saleStart && !saleIsOver;
     let presaleIsOn = now >= presaleStart && !presaleIsOver;
+    // let presaleIsOver = saleEnd - now <= 0;
+    // let saleIsOver = saleStart - now <= 0;
+    // let saleIsOn = now >= presaleStart && !saleIsOver;
+    // let presaleIsOn = now >= presaleEnd && !presaleIsOver;
 
     //	let _discountPrice = 0;
     let _discountPrice = ethers.BigNumber.from('50000000000000000');
@@ -446,14 +450,13 @@ const MintPage = () => {
     }
   };
 
-  const mintRegular = async (amount, price) => {
-    console.log(amount * price);
+  const mintRegular = async (amount) => {
     let sc = saleContract.connect(ethersProvider.getSigner());
 
     setShowCheckout(false);
     setApproveInProgress(true);
     const tx = await sc
-      .mint(amount, { value: ethers.utils.parseEther(price.toString()) })
+      .mint(amount, { value: ethers.utils.parseEther(salePrice.toString()) })
       .catch(handleError);
     setApproveInProgress(false);
 
@@ -466,8 +469,8 @@ const MintPage = () => {
       });
       setTxInProgress(false);
       getSaleInfo();
-      // setTab(1); //-> wallet
-      localStorage.setItem('activeTab', 1);
+      setActiveTab(2);
+      // localStorage.setItem('activeTab', 1);
     }
   };
   const handleError = (e) => {
@@ -493,7 +496,7 @@ const MintPage = () => {
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
-        <Typography variant="pageTitleDescription" sx={{...sx.subTitle, marginBottom:"70px"}}>
+        <Typography variant="pageTitleDescription" sx={{...sx.subTitle, marginBottom:"50px"}}>
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
       )}
@@ -504,7 +507,19 @@ const MintPage = () => {
               Presale started
             </Typography>
           ) : (
+            <>
+           {
+              !preSaleFinished &&
+              <>
+              <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{marginBottom:0}}>
+              Presale sale starts in :
+            </Typography>
             <Counter date={presaleTimeCounter} />
+            <br/>
+            </>
+            
+            }
+            </>
           )}
           {mainSaleStarted ? (
             <Typography variant="pageTitleDescription" sx={sx.subTitle}>
@@ -512,10 +527,12 @@ const MintPage = () => {
             </Typography>
           ) : (
             <Box sx={{textAlign:"center"}}>
-              <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+               {!mainSaleFinished &&
+               <>
+               <Typography variant="pageTitleDescription" sx={sx.subTitle}>
                 Main sale starts in :
               </Typography>
-              <Counter date={saleTimeCounter} />
+              <Counter date={saleTimeCounter} /></>}
               <br/>
             </Box>
           )}

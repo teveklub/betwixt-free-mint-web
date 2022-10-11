@@ -54,7 +54,7 @@ const CheckoutModal = ({
         {!isPresale && (
           <MintQuantity
             price={Number(salePrice)}
-            maxAmount={whitelistLimit}
+            maxAmount={1}
             onClickMint={mintSale}
           />
         )}
