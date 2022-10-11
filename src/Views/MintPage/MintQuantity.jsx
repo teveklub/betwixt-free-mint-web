@@ -77,7 +77,13 @@ const MintQuantity = ({ title, price, maxAmount, onClickMint }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 console.log('MINTQUANTYTY', typeof price);
   useEffect(() => {
-    setTotalPrice(parseFloat((price * quantity).toFixed(3)));
+    
+    if(price === "FREE"){
+      console.log("price string ")
+      setTotalPrice(price);
+      return
+    }
+    setTotalPrice("ETH " + parseFloat((price * quantity).toFixed(3)));
   }, [quantity]);
 
   const onNumberInput = (val) => {
@@ -109,7 +115,7 @@ console.log('MINTQUANTYTY', typeof price);
           </Typography>
           <Box display="flex" sx={sx.priceContainer}>
             <Typography sx={sx.price} variant="text">
-              ETH {totalPrice}
+             {totalPrice}
             </Typography>
           </Box>
         </Box>

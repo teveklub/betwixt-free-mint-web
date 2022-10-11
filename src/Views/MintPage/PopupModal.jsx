@@ -74,7 +74,7 @@ const sx = {
   body: {
     width: '100%',
     minHeight: '50px',
-    fontFamily: 'bau',
+    fontFamily: 'Jotia',
     fontSize: '16px',
   },
   footer: {

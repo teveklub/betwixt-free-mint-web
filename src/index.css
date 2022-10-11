@@ -9,7 +9,14 @@ body {
 body iframe {
   display: none;
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'Schnyder';
+  src: local('Schnyder'), url(./assets/fonts/Schnyder.ttf) format('truetype');
+  font-display: swap;
 }
+@font-face {
+  font-family: 'Jotia';
+  src: local('Jotia'), url(./assets/fonts/Jotia.ttf) format('truetype');
+  font-display: swap;
+}
+

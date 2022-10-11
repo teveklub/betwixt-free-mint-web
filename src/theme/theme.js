@@ -12,7 +12,7 @@ const theme = createTheme({
         pageTitle: {
             textAlign: 'center',
             color: COLORS.primaryColor,
-            fontFamily: 'Schnyder M App',
+            fontFamily: 'Schnyder',
             fontWeight: 300,
             fontSize: '64px',
             lineHeight: '77px',
@@ -24,7 +24,7 @@ const theme = createTheme({
         pageTitleDescription: {
             textAlign: 'center',
             color: COLORS.primaryColor,
-            fontFamily: 'Jotia-Regular',
+            fontFamily: 'Jotia',
             fontSize: '14px',
             lineHeight: '17px',
             textTransform: 'uppercase',
@@ -36,7 +36,7 @@ const theme = createTheme({
         counterNumber: {
             textAlign: 'center',
             color: COLORS.primaryColor,
-            fontFamily: 'Jotia-Regular',
+            fontFamily: 'Jotia',
             fontSize: '32px',
             textTransform: 'uppercase',
             [BP1]: {
@@ -46,7 +46,7 @@ const theme = createTheme({
         boxText: {
             textAlign: 'center',
             color: COLORS.primaryColor,
-            fontFamily: 'Jotia-Regular',
+            fontFamily: 'Jotia',
             fontSize: '24px',
             textTransform: 'uppercase',
             [BP1]: {
@@ -56,7 +56,7 @@ const theme = createTheme({
         share: {
             textAlign: 'center',
             color: COLORS.primaryColor,
-            fontFamily: 'Jotia-Regular',
+            fontFamily: 'Jotia',
             fontSize: '16px',
             textTransform: 'uppercase',
             cursor: 'pointer',
@@ -71,7 +71,7 @@ const theme = createTheme({
                 grayButton: {
                     color: COLORS.primaryColor,
                     padding: '18px',
-                    fontFamily: 'Jotia-Regular',
+                    fontFamily: 'Jotia',
                     fontSize: '22px',
                     lineHeight: '29px',
                     textTransform: 'uppercase',

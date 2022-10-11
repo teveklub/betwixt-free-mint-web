@@ -1,7 +1,7 @@
 import { Box } from '@mui/system'
 import React from 'react'
 import banner from '../assets/images/banner.png'
-
+import { useNavigate } from 'react-router-dom'
 const sx = {
     root: {
         maxWidth: '570px',
@@ -12,9 +12,10 @@ const sx = {
     }
 }
 
-const Banner = ({ style }) => {
+const Banner = ({ style,onClick }) => {
+    const navigate = useNavigate();
     return (
-        <Box sx={{...sx.root, ...style }}>
+        <Box sx={{...sx.root, ...style }} onClick={onClick}>
             <img src={banner} alt="banner" />
         </Box>
     )

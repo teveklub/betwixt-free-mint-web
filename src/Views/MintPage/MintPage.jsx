@@ -277,17 +277,6 @@ const MintPage = () => {
     //	let _discountPrice = 0;
     let _discountPrice = ethers.BigNumber.from('50000000000000000');
 
-    //ec holder's hack
-    //let ecHolder = getUserParams();
-    //console.log('USER IS EC HOLDER', ecHolder);
-
-    /* 	if (ecHolder) {
-      _discountPrice = ethers.BigNumber.from(ecHolder.params.eth_price); //info.discountPrice;
-      setUserIsEcHolder(true);
-      console.log('USER IS EC HOLDER2', ecHolder);
-    } else {
-      setUserIsEcHolder(false);
-    } */
 
     setDiscountPrice(ethers.utils.formatEther(_discountPrice));
     setSalePrice(ethers.utils.formatEther(fullPrice));
@@ -300,13 +289,6 @@ const MintPage = () => {
 
     setMainSaleStarted(saleIsOn);
     setMainSaleFinished(saleIsOver);
-
-    //console.log(presaleStart,presaleEnd,saleStart,saleEnd,maxTokens,fullPrice,discountPrice,userMinted);
-
-    /* 	console.log('presaleIsOver',presaleIsOver,presaleEnd-now);
-        console.log('saleIsOver',saleIsOver,saleEnd-now);
-        console.log('presaleIsOn',presaleIsOn,now>=presaleStart,presaleIsOver);
-        console.log('saleIsOn',saleIsOn,now>=saleStart, !saleIsOver); */
 
     setPresaleStartTime(new Date(presaleStart * 1000));
     setPresaleEndTime(new Date(presaleEnd * 1000));
@@ -363,7 +345,8 @@ const MintPage = () => {
       toast.error('You have already used up your presale quota.');
       return;
     }
-    console.log(maxMintable, " alreadyMintedByWallet");
+    console.log(maxMintable, " maxmintable");
+    
     setUserMaxDiscountMintable(maxMintable);
     setCheckoutIsPresale(true);
     setIsCreditCard(false);
@@ -502,7 +485,7 @@ const MintPage = () => {
   };
   return (
     <Box className="center-div" sx={sx.root}>
-      {activeTab > 0 && <Banner style={sx.bannerMintedPage} />}
+      {activeTab > 0 && <Banner style={sx.bannerMintedPage} onClick={()=>setActiveTab(0)}/>}
       <Typography
         variant="pageTitle"
         sx={{ ...sx.title, ...(activeTab === 2 && { mt: '-45px' }) }}
@@ -541,12 +524,6 @@ const MintPage = () => {
               <Button variant="grayButton" onClick={handleOnClick}>
                 {buttonText}
               </Button>
-              {
-                userAlreadyMinted && 
-                <Button variant="grayButton" onClick={handleGoToWallet} sx={{marginTop:"30px"}}>
-                Go to Wallet
-              </Button>
-              }
             
           </>
           }
@@ -571,7 +548,7 @@ const MintPage = () => {
             : maxMintableDuringMainSale
         }
         salePrice={salePrice}
-        presalePrice={discountPrice}
+        presalePrice="FREE"
         mintSale={mintRegular}
         mintPresale={mintDisco}
       />
