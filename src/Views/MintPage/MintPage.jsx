@@ -14,7 +14,7 @@ import { toast } from 'react-toast';
 import whitelist from "../../whitelist/whitelist.json"
 import CheckoutModal from './CheckoutModal';
 import TxProgressModal from './TxProgressModal';
-const date = new Date('2022-10-05T15:00:00.000Z');
+const date = new Date('2022-10-17T16:00:00.000Z');
 
 const BP1 = '@media (max-width: 450px)';
 
