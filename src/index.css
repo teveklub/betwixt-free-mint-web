@@ -9,6 +9,9 @@ body {
 body iframe {
   display: none;
 }
+.numericInput input{
+  -moz-appearance:textfield;
+}
 @font-face {
   font-family: 'Schnyder';
   src: local('Schnyder'), url(./assets/fonts/Schnyder.ttf) format('truetype');

@@ -20,6 +20,7 @@ const sx = {
     fontSize: 22,
     width: 10,
     minWidth: 20,
+    height:40,
     maxHeight: 40,
     textAlign: "center",
     textAlignLast: "center",
@@ -32,7 +33,7 @@ const sx = {
     "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
       {
         display: "none",
-      },
+     },
     "& input": {
       padding: 0,
     },
@@ -92,6 +93,7 @@ const NumericInput = ({ value, max, min, onChange }) => {
   }, [counter]);
 
   const handleIncrement = () => {
+    max = 1;
     if (max != null) {
       if (counter < max) {
         setCounter(counter + 1);
@@ -124,6 +126,7 @@ const NumericInput = ({ value, max, min, onChange }) => {
       <Button sx={{ ...sx.button, ...sx.buttonLeft }} onClick={handleDecrement}>
         -
       </Button>
+      <div className="numericInput">
       <Input
         type="number"
         sx={{ ...sx.input }}
@@ -148,6 +151,7 @@ const NumericInput = ({ value, max, min, onChange }) => {
           }
         }}
       ></Input>
+      </div>
 
       <Button
         sx={{ ...sx.button, ...sx.buttonRight }}

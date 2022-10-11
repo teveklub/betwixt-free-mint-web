@@ -1,13 +1,16 @@
 import { Box } from '@mui/system'
 import React from 'react'
-import banner from '../assets/images/banner.png'
+import banner from '../assets/images/banner.svg'
 import { useNavigate } from 'react-router-dom'
 const sx = {
     root: {
         maxWidth: '570px',
         margin: 'auto',
+        paddingBottom:"50px",
         'img': {
-            width: '100%'
+            width: 'auto',
+            height:"130px"
+
         }
     }
 }
