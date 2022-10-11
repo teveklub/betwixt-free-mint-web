@@ -37,6 +37,7 @@
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    animation: rotate 6s infinite;
   }
   
   .counter-content-holder {
@@ -100,4 +101,13 @@
   
   .disabled .counter-rotary-item, .disabled .counter-circle{
     border-color:black;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(45deg);
+    }
+   to {
+      transform: rotate(405deg);
+    }
   }

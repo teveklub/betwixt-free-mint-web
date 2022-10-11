@@ -23,8 +23,9 @@ const sx = {
     lineHeight:"30px"
   },
   url: {
+    fontFamily: 'Jotia-Regular',
     textDecoration: "none",
-    color: "#FF692B",
+    color: "#628BA0",
     fontWeight: "700",
   },
 };
