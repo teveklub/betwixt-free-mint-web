@@ -96,6 +96,7 @@ const MintPage = () => {
   const [signatures, setSignatures] = useState(null);
 
   useEffect(() => {
+    console.log("address: ", address)
     if (address && address !== null) {
       setButtonText('MINT');
       setActiveTab(1);
@@ -105,7 +106,9 @@ const MintPage = () => {
     }
   }, [address]);
   useEffect(() => {
+    if(address === null) return;
     (async () => {
+     
       const alreadyMintedByWallet = await saleContract
       ._mintedByWallet(address)
       .catch((e) => console.log)
@@ -140,6 +143,7 @@ const MintPage = () => {
 
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
+    if(address === null) return
     (async () => {
       const balanceOf = await tokenContract.balanceOf(address).catch(e=>toast.error(e.message))
       console.log(balanceOf.toNumber(), " balance")
@@ -330,7 +334,7 @@ const MintPage = () => {
   };
 
   const handleDiscountMint = async () => {
-    
+    console.log("handle discount mint")
     let maxMintable = 0;
 
     //mintInfo =  await saleContract.checkDiscountAvailable(address);
@@ -579,11 +583,13 @@ const MintPage = () => {
       <Counter date={saleTimeCounter} /> */}
 
       {activeTab === 2 && (
+       <>
         <Success
           counterDate={date}
           image={maskImage}
-        />
+        /></>
       )}
+      
       <TxProgressModal isOpen={txInProgress} txEtherScan={txEtherScan} />
     </Box>
   );
