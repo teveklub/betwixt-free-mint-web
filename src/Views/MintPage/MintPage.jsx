@@ -195,7 +195,7 @@ const MintPage = () => {
       );
       //console.log('USER KEY', key);
       if (key) {
-        const userParams = whitelist[key].paramObj;
+        // const userParams = whitelist[key].paramObj;
         const userParamsRaw = whitelist[key].params;
 
         // up = {
@@ -211,11 +211,11 @@ const MintPage = () => {
         // };
         up = {
           params: {
-            max_mint: userParams['max_mint'],
-            receiver: userParams['receiver'],
-            valid_from: userParams['valid_from'],
-            valid_to: userParams['valid_to'],
-            eth_price: userParams['eth_price'],
+            max_mint: userParamsRaw[3],
+            receiver: userParamsRaw[4],
+            valid_from: userParamsRaw[5],
+            valid_to: userParamsRaw[6],
+            eth_price: userParamsRaw[7],
           },
           raw_params: userParamsRaw,
           signature: whitelist[key].signature,
