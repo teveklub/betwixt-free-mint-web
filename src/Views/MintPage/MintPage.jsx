@@ -503,6 +503,10 @@ const MintPage = () => {
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
       )}
+
+{preSaleFinished && mainSaleFinished && <Success counterDate={date} salesOver/>}
+
+
       {activeTab < 2 && (
         <>
           {preSaleStarted ? (

@@ -23,13 +23,13 @@ function App() {
     <ThemeProvider theme={theme}>
     <Web3Manager>
       <HashRouter basename='/'>
-        <Box sx={sx.root} color={theme.palette.background}>
+        <Box sx={sx.root} color={theme.palette.background} className="base-div">
             <Routes>
               {routes.map(({ path, component, exact }) => (
                 <Route key={path} path={path} element={component} exact={exact} />
               ))}
             </Routes>
-            <ToastContainer position='bottom-right' delay={4000} />
+            <ToastContainer position='bottom-right' delay={4000} className="toast" />
             <Footer />
         </Box>
       </HashRouter>
