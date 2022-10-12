@@ -11,7 +11,7 @@ import tokenAbi from '../../contracts/TokenContract.json';
 import config from '../../config/config';
 import Counter from '../../components/Counter';
 import { toast } from 'react-toast';
-import whitelist from "../../whitelist/whitelist.json"
+import whitelist from '../../whitelist/whitelist.json';
 import CheckoutModal from './CheckoutModal';
 import TxProgressModal from './TxProgressModal';
 const date = new Date('2022-10-17T16:00:00.000Z');
@@ -42,7 +42,7 @@ const MintPage = () => {
   const { onboard, handleConnect, address, ethersProvider } = useWeb3Ctx();
   const [buttonText, setButtonText] = useState('Connect Wallet');
   const [activeTab, setActiveTab] = useState(0);
-  const [userAlreadyMinted, setUserAlreadyMinted]= useState(false);
+  const [userAlreadyMinted, setUserAlreadyMinted] = useState(false);
   const saleContract = new ethers.Contract(
     config.SALE_CONTRACT,
     saleAbi.abi,
@@ -90,13 +90,13 @@ const MintPage = () => {
   const [maxMintableDuringMainSale, setMaxMintableDuringMainSale] =
     useState(10);
   const [userMaxDiscountMintable, setUserMaxDiscountMintable] = useState(0);
-  const [maxMintPerTransaction, setMaxMintPerTransaction] = useState(10);
+  const [maxMintPerTransaction, setMaxMintPerTransaction] = useState(1);
   const [refreshInterval, setRefreshInterval] = useState(null);
 
   const [signatures, setSignatures] = useState(null);
 
   useEffect(() => {
-    console.log("address: ", address)
+    console.log('address: ', address);
     if (address && address !== null) {
       setButtonText('MINT');
       setActiveTab(1);
@@ -106,19 +106,17 @@ const MintPage = () => {
     }
   }, [address]);
   useEffect(() => {
-    if(address === null) return;
+    if (address === null) return;
     (async () => {
-     
       const alreadyMintedByWallet = await saleContract
-      ._mintedByWallet(address)
-      .catch((e) => console.log)
-      if(alreadyMintedByWallet.toNumber() > 0){
-        setUserAlreadyMinted(true)
+        ._mintedByWallet(address)
+        .catch((e) => console.log);
+      if (alreadyMintedByWallet.toNumber() > 0) {
+        setUserAlreadyMinted(true);
       }
-      console.log(alreadyMintedByWallet, " setUserAlreadyMinted")
-   })()
-  }, [])
-  
+      console.log(alreadyMintedByWallet, ' setUserAlreadyMinted');
+    })();
+  }, []);
 
   const handleOnClick = () => {
     switch (activeTab) {
@@ -137,22 +135,26 @@ const MintPage = () => {
         break;
     }
   };
-  const handleGoToWallet = () =>{
+  const handleGoToWallet = () => {
     setActiveTab(2);
-  }
+  };
 
   useEffect(() => {
     // console.log(ethersProviderVar, " ethersProviderVar")
-    if(address === null) return
+    if (address === null) return;
     (async () => {
-      const balanceOf = await tokenContract.balanceOf(address).catch(e=>toast.error(e.message))
-      console.log(balanceOf.toNumber(), " balance")
+      const balanceOf = await tokenContract
+        .balanceOf(address)
+        .catch((e) => toast.error(e.message));
+      console.log(balanceOf.toNumber(), ' balance');
       if (balanceOf < 1) return;
-      const token = await tokenContract.tokenOfOwnerByIndex(address,0).catch((e)=>{
-        toast.error(e.message)
-      })
-      if(token){
-        console.log(token, " token")
+      const token = await tokenContract
+        .tokenOfOwnerByIndex(address, 0)
+        .catch((e) => {
+          toast.error(e.message);
+        });
+      if (token) {
+        console.log(token, ' token');
       }
       // const minted = await getMintedByWallet();
       // console.log(minted, ' minted by wallet');
@@ -209,7 +211,7 @@ const MintPage = () => {
         // };
         up = {
           params: {
-            max_mint: userParams["max_mint"],
+            max_mint: userParams['max_mint'],
             receiver: userParams['receiver'],
             valid_from: userParams['valid_from'],
             valid_to: userParams['valid_to'],
@@ -268,7 +270,7 @@ const MintPage = () => {
         console.log('presale end time', presaleEnd)
         console.log('sale start time', saleStart)
         console.log('sale end time', saleEnd) */
-    console.log(saleStart, " presale end")
+    console.log(saleStart, ' presale end');
     let presaleIsOver = presaleEnd - now <= 0;
     let saleIsOver = saleEnd - now <= 0;
     let saleIsOn = now >= saleStart && !saleIsOver;
@@ -280,7 +282,6 @@ const MintPage = () => {
 
     //	let _discountPrice = 0;
     let _discountPrice = ethers.BigNumber.from('50000000000000000');
-
 
     setDiscountPrice(ethers.utils.formatEther(_discountPrice));
     setSalePrice(ethers.utils.formatEther(fullPrice));
@@ -320,7 +321,7 @@ const MintPage = () => {
   };
 
   const handleDiscountMint = async () => {
-    console.log("handle discount mint")
+    console.log('handle discount mint');
     let maxMintable = 0;
 
     //mintInfo =  await saleContract.checkDiscountAvailable(address);
@@ -328,42 +329,41 @@ const MintPage = () => {
     const userParams = getUserParams();
 
     if (!userParams) {
-      toast.error("Address not found in the whitelist")
+      toast.error('Address not found in the whitelist');
       setShowErrorPopup(true);
       return;
     }
-    
+
     const alreadyMintedByWallet = await saleContract
       ._mintedByWallet(address)
       .catch((e) => console.log);
-      console.log(alreadyMintedByWallet, " alreadyMintedByWallet")
+    console.log(alreadyMintedByWallet, ' alreadyMintedByWallet');
     //console.log('minted by wallet',alreadyMintedByWallet);
 
     if (alreadyMintedByWallet) {
       maxMintable = userParams.params.max_mint - Number(alreadyMintedByWallet);
     }
-    
+
     //console.log('maxMintable', maxMintable);
 
     if (maxMintable < 1) {
       toast.error('You have already used up your presale quota.');
       return;
     }
-    console.log(maxMintable, " maxmintable");
-    
-    setUserMaxDiscountMintable(maxMintable);
+    console.log(maxMintable, ' maxmintable');
+    setUserMaxDiscountMintable(Math.min(maxMintPerTransaction,maxMintable));
+    // setUserMaxDiscountMintable(maxMintable);
     setCheckoutIsPresale(true);
     setIsCreditCard(false);
     setShowCheckout(true);
   };
-  const handleReveal = async () =>{
+  const handleReveal = async () => {
     const reveal = await saleContract
-    .Goerli_revealAtCurrentSuppl()
-    .catch((e) => console.log('err:', e));
-    if(reveal){
-
+      .Goerli_revealAtCurrentSuppl()
+      .catch((e) => console.log('err:', e));
+    if (reveal) {
     }
-  }
+  };
   const handleMint = async () => {
     setApproveInProgress(true);
     console.log('!!!!!!!max tokens per adddres', maxTokenPerAddress);
@@ -405,7 +405,7 @@ const MintPage = () => {
     let sc = saleContract.connect(ethersProvider.getSigner());
 
     setShowCheckout(false);
-    
+
     setApproveInProgress(true);
 
     let userParams = getUserParams();
@@ -416,11 +416,10 @@ const MintPage = () => {
     let tx = null;
 
     tx = await sc
-    .mint_approved([...userParams.raw_params, userParams.signature], amount, {
-      value:amount,
-    })
+      .mint_approved([...userParams.raw_params, userParams.signature], amount, {
+        value: amount,
+      })
       .catch(handleError);
-   
 
     setApproveInProgress(false);
 
@@ -428,7 +427,7 @@ const MintPage = () => {
       setTxEtherScan(`${config.ETHERSCAN_URL}/tx/${tx.hash}`);
       setTxInProgress(true);
       let res = await tx.wait().catch((e) => {
-        console.log(e, " errrrrrrrror")
+        console.log(e, ' errrrrrrrror');
         handleError(e);
         setTxInProgress(false);
       });
@@ -439,12 +438,11 @@ const MintPage = () => {
       //   setTxInProgress(false);
       // });
       // let receipt = await resTwo.getReceipt();
-      if(res){
+      if (res) {
         setTxInProgress(false);
         getSaleInfo();
         setActiveTab(2); //-> wallet
       }
-  
 
       localStorage.setItem('activeTab', 1);
     }
@@ -488,7 +486,9 @@ const MintPage = () => {
   };
   return (
     <Box className="center-div" sx={sx.root}>
-      {activeTab > 0 && <Banner style={sx.bannerMintedPage} onClick={()=>setActiveTab(0)}/>}
+      {activeTab > 0 && (
+        <Banner style={sx.bannerMintedPage} onClick={() => setActiveTab(0)} />
+      )}
       <Typography
         variant="pageTitle"
         sx={{ ...sx.title, ...(activeTab === 2 && { mt: '-45px' }) }}
@@ -496,7 +496,10 @@ const MintPage = () => {
         Braves Free Mint
       </Typography>
       {activeTab < 2 && (
-        <Typography variant="pageTitleDescription" sx={{...sx.subTitle, marginBottom:"50px"}}>
+        <Typography
+          variant="pageTitleDescription"
+          sx={{ ...sx.subTitle, marginBottom: '50px' }}
+        >
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
       )}
@@ -504,45 +507,60 @@ const MintPage = () => {
         <>
           {preSaleStarted ? (
             <Typography variant="pageTitleDescription" sx={sx.subTitle}>
-              Presale started
+              Whitelist mint started
             </Typography>
           ) : (
             <>
-           {
-              !preSaleFinished &&
-              <>
-              <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{marginBottom:0}}>
-              Presale sale starts in :
-            </Typography>
-            <Counter date={presaleTimeCounter} />
-            <br/>
-            </>
-            
-            }
+              {!preSaleFinished && (
+                <>
+                  <Typography
+                    variant="pageTitleDescription"
+                    sx={sx.subTitle}
+                    style={{ marginBottom: 0 }}
+                  >
+                    Whitelist mint starts in :
+                  </Typography>
+                  <Counter date={presaleTimeCounter} />
+                  <br />
+                </>
+              )}
             </>
           )}
           {mainSaleStarted ? (
             <Typography variant="pageTitleDescription" sx={sx.subTitle}>
-              Main sale started
+             Public mint started
             </Typography>
           ) : (
-            <Box sx={{textAlign:"center"}}>
-               {!mainSaleFinished &&
-               <>
-               <Typography variant="pageTitleDescription" sx={sx.subTitle}>
-                Main sale starts in :
-              </Typography>
-              <Counter date={saleTimeCounter} /></>}
-              <br/>
+            <Box sx={{ textAlign: 'center' }}>
+              {!mainSaleFinished && (
+                <>
+                  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
+                  Public mint starts in :
+                  </Typography>
+                  <Counter date={saleTimeCounter} />
+                </>
+              )}
+              <br />
             </Box>
           )}
-         
-            {activeTab !== 2 &&  <>
+
+          {activeTab !== 2 && (preSaleStarted || mainSaleStarted) && (
+            <>
               <Button variant="grayButton" onClick={handleOnClick}>
                 {buttonText}
               </Button>
-            
-          </>
+            </>
+          )}
+          {!mainSaleStarted && !preSaleStarted && !mainSaleFinished && !preSaleFinished &&
+          <>
+          <Typography
+          variant="pageTitleDescription"
+          sx={sx.subTitle}
+          style={{ marginBottom: 0 }}
+        >
+          Mint is not started yet!
+        </Typography>
+        </>
           }
           {/* {showErrorPopup 
           &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
@@ -550,25 +568,25 @@ const MintPage = () => {
         </Typography>
           } */}
           <CheckoutModal
-        tokenName=""
-        isOpen={showCheckout}
-        setOpen={() => {
-          if (!txInProgress && !approveInProgress) {
-            setShowCheckout(false);
-          }
-        }}
-        isPresale={checkoutIsPresale}
-        withCreditCard={isCreditCard}
-        whitelistLimit={
-          checkoutIsPresale
-            ? userMaxDiscountMintable
-            : maxMintableDuringMainSale
-        }
-        salePrice={salePrice}
-        presalePrice="FREE"
-        mintSale={mintRegular}
-        mintPresale={mintDisco}
-      />
+            tokenName=""
+            isOpen={showCheckout}
+            setOpen={() => {
+              if (!txInProgress && !approveInProgress) {
+                setShowCheckout(false);
+              }
+            }}
+            isPresale={checkoutIsPresale}
+            withCreditCard={isCreditCard}
+            whitelistLimit={
+              checkoutIsPresale
+                ? userMaxDiscountMintable
+                : maxMintableDuringMainSale
+            }
+            salePrice={salePrice}
+            presalePrice="FREE"
+            mintSale={mintRegular}
+            mintPresale={mintDisco}
+          />
         </>
       )}
       {/*<Typography variant="pageTitleDescription" >PResale </Typography>
@@ -577,13 +595,11 @@ const MintPage = () => {
       <Counter date={saleTimeCounter} /> */}
 
       {activeTab === 2 && (
-       <>
-        <Success
-          counterDate={date}
-          image={maskImage}
-        /></>
+        <>
+          <Success counterDate={date} image={maskImage} />
+        </>
       )}
-      
+
       <TxProgressModal isOpen={txInProgress} txEtherScan={txEtherScan} />
     </Box>
   );

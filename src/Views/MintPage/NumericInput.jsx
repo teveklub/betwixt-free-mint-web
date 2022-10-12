@@ -93,7 +93,7 @@ const NumericInput = ({ value, max, min, onChange }) => {
   }, [counter]);
 
   const handleIncrement = () => {
-    max = 1;
+    // max = 1;
     if (max != null) {
       if (counter < max) {
         setCounter(counter + 1);
