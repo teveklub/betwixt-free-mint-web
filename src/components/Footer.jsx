@@ -33,6 +33,7 @@ const sx = {
         }
     },
     text: {
+        textTransform:"uppercase",
         font: 'Jotia-Regular',
         color: '#FFF',
         fontSize: '12px',
