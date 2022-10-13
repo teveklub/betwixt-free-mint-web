@@ -1,0 +1,254 @@
+{
+  "0x5f1caf930d81e3d07c540f9cd27b65f3934c682f": {
+    "params": [
+      84,
+      5,
+      false,
+      2,
+      "0x5F1Caf930d81E3D07C540F9cD27b65F3934c682F",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x4e049dc68e3d6a261b1e6ac90413e0854105a25da75de47283bd55ac11b08702199095a1c5859424b4c99c9e694b5c28ffc4ba269d822afdb8b5c6a470e300821b"
+  },
+  "0xe1ae0d1721a61b7be6cb8fe2bc046dc940c4ab31": {
+    "params": [
+      84,
+      5,
+      false,
+      3,
+      "0xe1Ae0d1721A61B7BE6Cb8fE2BC046dC940C4Ab31",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0xd053e9cd5048fffca0d2f7460943f90fce0a1c05ffc81c3c4f8739bf385089a24c1aecdb837c25ccfbc8cfc9548d9f50786f9af7c59609e4472c396bca6f69ef1b"
+  },
+  "0xd2f7e3cdeff47922b2ba5eaba27b2d55e7b3f7a7": {
+    "params": [
+      84,
+      5,
+      false,
+      4,
+      "0xd2F7e3cDEFF47922b2Ba5EaBA27B2d55E7B3f7A7",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x97d1d131363e579e00e9da81c5ac8be5f0269ebc1405abbff9597c84ebc454df303820545c1eca4a713e341feefc11fb5642f0e1799949fab9fd618b3f29fdc01b"
+  },
+  "0x8579ab4a480d188c2b1104f65213b943416ad509": {
+    "params": [
+      84,
+      5,
+      false,
+      2000,
+      "0x8579AB4a480D188C2b1104F65213b943416ad509",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x1fccfd80f0c9a12a83e552e70597079d8666ec4f4c66b3378161637c3de068bd1716216fa87126e689a6439067710fc3a20f481119843633523faf485a829a6b1c"
+  },
+  "0xdfcd36c7f2df99002da4bef1b188224adb151c0a": {
+    "params": [
+      84,
+      5,
+      false,
+      1,
+      "0xdFcD36c7F2DF99002da4BeF1b188224ADB151c0a",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0xfb9631a5e6d5fc902b30fe94bbe361ed0c9d61f1f9f7822df3d2a8246cfbce2315332cea4f5efbc7b144a05ea2b9426887820561662440a13bd9a4f43b4dcf6e1b"
+  },
+  "0x3d94c5bfd125f566acd91dcefc637967639e23ee": {
+    "params": [
+      84,
+      5,
+      false,
+      2,
+      "0x3d94c5bfD125F566AcD91DCefC637967639e23ee",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0xb9613177f4ae5190b8bf95254e160f9888abdf36d6ff94a9c1043256372e51e47b3dbc58f7dabf1700928b2ba6206399ac42beeab6f5de3305ec56fa1975449c1c"
+  },
+  "0x12d532af04fcfa7651d11576460919993c873c79": {
+    "params": [
+      84,
+      5,
+      false,
+      3,
+      "0x12d532Af04fcFA7651d11576460919993C873c79",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x79c2045a11a2bd003e74f302e502c071af922d44b3d7fa5572bce0bab43cc2fc561ad7e4b9e8af65077199f347d5a176b7029a4a385dbb22d03bf33ddd2465201c"
+  },
+  "0xc0ae3844bf0a54779d43e050b35f988ac2cdad1d": {
+    "params": [
+      84,
+      5,
+      false,
+      1,
+      "0xc0ae3844Bf0a54779D43E050b35F988aC2CDaD1d",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x33498ba3d181a3664f110e84f213f31e62ab207165ce075c4ac475ec5dd92b646e97e724a9179d7259e1c9fffdd661617a515ff88dfd2df4d3cd08d2c9a2b6bd1b"
+  },
+  "0x79a20b91663af807f39f0435dc71ab52baf5a87f": {
+    "params": [
+      84,
+      5,
+      false,
+      5,
+      "0x79a20B91663AF807f39f0435dC71ab52bAF5A87f",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x6cd05e8385012885596fd64cad8d676086e9754ddc7b512a2e46523ed55ed60e719be056eca4bd72d342847bf913aa0f0ee8b6573831cdd90e18104ad5dac3791c"
+  },
+  "0x857cebd39a4c2517ca25d692cc7570d052383f22": {
+    "params": [
+      84,
+      5,
+      false,
+      5,
+      "0x857CeBd39A4c2517Ca25d692CC7570d052383F22",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x21c25384f7e3c6ed57f4a76e9b29c19a13a0b3ac476b2d7550d8655455f58ec1658452b8aab8160d9b0a5bbe5061fd548895778bfedb15e21b3ed711c6c745af1b"
+  },
+  "0x37b0812b2f5aa18326ec68fb53bda62857862868": {
+    "params": [
+      84,
+      5,
+      false,
+      1,
+      "0x37b0812b2f5aa18326ec68Fb53bdA62857862868",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x168ee1a177765e04ca427de204ceabb5b72e7eb1b4eb54bac2fd7ac68012392a106864fc291ae832d3f2fe7630428865585d2ad89f9f81f2ca5fc2883620d8341b"
+  },
+  "0x4ba3a67e69fb4f3d502836f663545de3b577d68c": {
+    "params": [
+      84,
+      5,
+      false,
+      3,
+      "0x4BA3A67E69Fb4f3d502836f663545DE3b577D68C",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x0f963d8497cbcebf33b3742fbe870b9ed53f06212ce6269f7a00806d33d451ca660ccca17c7395e8ca2c674bcb25ed98a1332c8831f1c91c7d64df0e0b9b591a1c"
+  },
+  "0x9c69dcd15fb57aa0db5580a783e7af58a8cedc7d": {
+    "params": [
+      84,
+      5,
+      false,
+      2000,
+      "0x9c69Dcd15FB57AA0DB5580a783e7AF58a8Cedc7D",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x1fef10084b19d0bf5eda39301a4d557427cde369f0919e5b7fada3ab6178bf7e5b0180484ee4b279429099c88d473b657cf5af70c8435a39353eb7de8af5d5e81b"
+  },
+  "0xa4cc712177246974aeae43cbfd1fbf3a76c528fe": {
+    "params": [
+      84,
+      5,
+      false,
+      1,
+      "0xa4Cc712177246974aeae43CBfd1FBf3a76C528fe",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x87e64950d996e496c290334fc6b377f6c46376a9bb712a04ea3a1c000b7f090f2819c8d40b8370f68a6b2e4190f6a954684f9bb6543c7cddbd8d1552ecfe92621c"
+  },
+  "0xd21622ea7604c9eee341c60ba77dd876bc38db90": {
+    "params": [
+      84,
+      5,
+      false,
+      50,
+      "0xD21622ea7604c9eeE341c60ba77dd876bC38dB90",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x4dcc9a1ac7d77a6b72db41317f7922b20183c1d265c4af912cd0032d159839de2bb1d83101d660bf70c67574e43595f1ef4ae0b213914d9b1da1e0e83afea1ac1b"
+  },
+  "0x492dc3120c693c50d7a833fa5814a25d73cae45a": {
+    "params": [
+      84,
+      5,
+      false,
+      1,
+      "0x492DC3120C693c50d7A833fa5814A25d73caE45a",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x74c61a360f5da0b24ac63e1cad98ea88d6b111b406be4dfa5bea016dc9702023078a4bd4fd4ee1df5459891fc5635fe7999b3a5f36ba94d1b09cff6f58bc6ace1b"
+  },
+  "0x06f86e5ad29a2fb43675074241be334b7a4ff07e": {
+    "params": [
+      84,
+      5,
+      false,
+      20,
+      "0x06f86E5ad29a2FB43675074241bE334B7A4fF07E",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x124f00e409f3d7000c32eae2f85eb6995ac4dbec0a73dbd9a7d6248eaf70a7c0386b65d7c1609a69f7dc173b126a908a8585c6a4e6b1e797863908ac258895d61c"
+  },
+  "0xbee0bcfb2caf3b1ec6243ce97414115a2364ac52": {
+    "params": [
+      84,
+      5,
+      false,
+      20,
+      "0xbEe0bCfb2CAf3B1eC6243ce97414115a2364aC52",
+      1664607600,
+      1666940400,
+      { "type": "BigNumber", "hex": "0x01" },
+      0
+    ],
+    "signature": "0x44ef3eb0d52de031bc8c31f22d2feb10d17a619d201178a4a3d1ffba9ed6dba74c58067adc95298b0fdfbedf57868421e01d444c17861a688e22b626410d89061b"
+  }
+}
