@@ -29,7 +29,7 @@ const sx = {
   },
   subTitle: {
     marginBottom: '30px',
-    fontSize: '25px',
+    fontSize: '24px',
   },
   bannerMintedPage: {
     // mt: '-45px',
@@ -37,6 +37,11 @@ const sx = {
       mt: 0,
     },
   },
+  pubMintHolder: {
+    dispaly: 'flex',
+    mb: '40px',
+    gap: '10px'
+  }
 };
 
 const MintPage = () => {
@@ -498,8 +503,7 @@ const MintPage = () => {
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && (
-        <Banner style={sx.bannerMintedPage} 
-        // onClick={() => setActiveTab(0)}
+        <Banner style={sx.bannerMintedPage} onClick={() => setActiveTab(1)}
          />
       )}
       <Typography
@@ -511,7 +515,7 @@ const MintPage = () => {
       {activeTab < 2 && (
         <Typography
           variant="pageTitleDescription"
-          sx={{ ...sx.subTitle, marginBottom: '50px', color: '#594569', fontSize: '14px' }}
+          sx={{ ...sx.subTitle, marginBottom: '40px', color: '#594569', fontSize: '14px' }}
         >
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
@@ -523,9 +527,14 @@ const MintPage = () => {
       {activeTab < 2 && (
         <>
           {preSaleStarted ? (
-            <Typography variant="pageTitleDescription" sx={sx.subTitle}>
-              Whitelist mint started
+            <>
+            <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{marginBottom: '10px'}}>
+              Whitelist mint:
             </Typography>
+            <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{backgroundColor: '#594569', padding: '17px 20px', marginBottom: '40px', width: '140px', marginTop: '15px', fontSize: '18px'}}>
+              started
+            </Typography>
+            </>
           ) : (
             <>
               {!preSaleFinished && (
@@ -549,15 +558,25 @@ const MintPage = () => {
             </Typography>
           ) : (
             <Box sx={{ textAlign: 'center' }}>
-              {!mainSaleFinished && (
+             {preSaleStarted && !mainSaleFinished && (
                 <>
                   <Typography variant="pageTitleDescription" sx={sx.subTitle}>
                   Public mint starts in :
                   </Typography>
-                  <Counter date={saleTimeCounter} handleCountingOver={handleCountingOver} />
+                  <Counter date={saleTimeCounter} />
                 </>
               )}
-              <br />
+            
+
+              {!preSaleStarted && !preSaleFinished &&  (
+                <Box className="pubMintHolder" sx={sx.pubMintHolder}>
+                  <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{fontSize: '18px'}}>
+                  Public mint starts in :
+                  </Typography>
+                  <Typography variant="pageTitleDescription" style={{color:'#594569', fontWeight: '700'}}> <Counter date={saleTimeCounter} simple /></Typography>
+                </Box>
+              )}
+              
             </Box>
           )}
 

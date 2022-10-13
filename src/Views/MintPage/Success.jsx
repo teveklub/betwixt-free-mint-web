@@ -107,7 +107,7 @@ const Success = ({
         <>
           <Typography
             variant="pageTitleDescription"
-            style={{ marginBottom: "25px", fontSize: "20px" }}
+            style={{ marginBottom: "50px", fontSize: "20px" }}
           >
             SALE ENDED
           </Typography>
