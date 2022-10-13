@@ -573,7 +573,7 @@ const MintPage = () => {
                   <Typography variant="pageTitleDescription" style={{fontSize: '18px'}}>
                   Public mint starts in :
                   </Typography>
-                  <Typography variant="pageTitleDescription" style={{color:'#594569', fontWeight: '700', fontSize: '18px'}}> <Counter date={saleTimeCounter} simple /></Typography>
+                  <Typography variant="pageTitleDescription" style={{color:'#594569', fontWeight: '700', fontSize: '18px'}}> <Counter date={saleTimeCounter}  handleCountingOver={handleCountingOver} simple /></Typography>
                 </Box>
               )}
               
