@@ -33,7 +33,7 @@ const sx = {
     mb: "50px",
   },
   comeBackText: {
-    fontSize: "20px",
+    fontSize: '24px',
     lineHeight: "24px",
     mb: "14px",
     [BP1]: {
@@ -41,6 +41,10 @@ const sx = {
       lineHeight: "20px",
     },
   },
+  toExperienceText: {
+    fontSize: '14px', 
+    color: '#594569'
+  }
 };
 
 const Success = ({
@@ -77,7 +81,7 @@ const Success = ({
                 {" "}
                 COME BACK FOR THE BURN EVENT
               </Typography>
-              <Typography variant="pageTitleDescription">
+              <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
                 {" "}
                 TO EXPEREINCE THE BETWIXT GAME
               </Typography>
@@ -95,7 +99,7 @@ const Success = ({
                 {" "}
                 COME BACK FOR THE BURN EVENT
               </Typography>
-              <Typography variant="pageTitleDescription">
+              <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
                 {" "}
                 TO EXPEREINCE THE BETWIXT GAME
               </Typography>
@@ -107,7 +111,7 @@ const Success = ({
         <>
           <Typography
             variant="pageTitleDescription"
-            style={{ marginBottom: "50px", fontSize: "20px" }}
+            style={{ marginBottom: "50px", fontSize: "18px" }}
           >
             SALE ENDED
           </Typography>
@@ -115,7 +119,7 @@ const Success = ({
             {" "}
             COME BACK FOR THE BURN EVENT
           </Typography>
-          <Typography variant="pageTitleDescription">
+          <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
             {" "}
             TO EXPEREINCE THE BETWIXT GAME
           </Typography>
