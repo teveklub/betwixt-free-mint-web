@@ -563,7 +563,7 @@ const MintPage = () => {
                   <Typography variant="pageTitleDescription" sx={sx.subTitle}>
                   Public mint starts in :
                   </Typography>
-                  <Counter date={saleTimeCounter} />
+                  <Counter date={saleTimeCounter} handleCountingOver={handleCountingOver} />
                 </>
               )}
             
