@@ -78,9 +78,9 @@ const Counter = ({ date, handleCountingOver, simple }) => {
     return (
         <>
         {simple ? (
-          <Box style={{fontWeight: '700'}}>
+          <>
               {values.d} days, {values.h} hours, {values.m} mins
-          </Box>
+          </>
         ) : (
           <Box sx={sx.counterBoxHolder}>
             <CounterCircle name="DAYS" value={values.d} />

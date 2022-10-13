@@ -570,10 +570,10 @@ const MintPage = () => {
 
               {!preSaleStarted && !preSaleFinished &&  (
                 <Box className="pubMintHolder" sx={sx.pubMintHolder}>
-                  <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{fontSize: '18px'}}>
+                  <Typography variant="pageTitleDescription" style={{fontSize: '18px'}}>
                   Public mint starts in :
                   </Typography>
-                  <Typography variant="pageTitleDescription" style={{color:'#594569', fontWeight: '700'}}> <Counter date={saleTimeCounter} simple /></Typography>
+                  <Typography variant="pageTitleDescription" style={{color:'#594569', fontWeight: '700', fontSize: '18px'}}> <Counter date={saleTimeCounter} simple /></Typography>
                 </Box>
               )}
               
