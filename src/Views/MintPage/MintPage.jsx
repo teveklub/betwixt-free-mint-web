@@ -29,6 +29,7 @@ const sx = {
   },
   subTitle: {
     marginBottom: '30px',
+    fontSize: '25px',
   },
   bannerMintedPage: {
     // mt: '-45px',
@@ -487,7 +488,9 @@ const MintPage = () => {
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && (
-        <Banner style={sx.bannerMintedPage} onClick={() => setActiveTab(0)} />
+        <Banner style={sx.bannerMintedPage} 
+        // onClick={() => setActiveTab(0)}
+         />
       )}
       <Typography
         variant="pageTitle"
@@ -498,7 +501,7 @@ const MintPage = () => {
       {activeTab < 2 && (
         <Typography
           variant="pageTitleDescription"
-          sx={{ ...sx.subTitle, marginBottom: '50px' }}
+          sx={{ ...sx.subTitle, marginBottom: '50px', color: '#594569', fontSize: '14px' }}
         >
           BEGIN YOUR JOURNEY INTO BETWIXT
         </Typography>
@@ -586,7 +589,8 @@ const MintPage = () => {
                 ? userMaxDiscountMintable
                 : maxMintableDuringMainSale
             }
-            salePrice={salePrice}
+            // salePrice={salePrice}
+            salePrice="FREE"
             presalePrice="FREE"
             mintSale={mintRegular}
             mintPresale={mintDisco}
@@ -601,6 +605,11 @@ const MintPage = () => {
       {activeTab === 2 && (
         <>
           <Success counterDate={date} image={maskImage} />
+        </>
+      )}
+      {activeTab !== 2 && !txInProgress && !approveInProgress && !mainSaleFinished && ! preSaleFinished &&  (
+        <>
+          <Success counterDate={date} image={maskImage} failed/>
         </>
       )}
 

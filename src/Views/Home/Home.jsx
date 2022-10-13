@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <Box className='center-div'>
       <Typography variant='pageTitle' sx={sx.title}>Braves Free Mint</Typography>
-      <Typography variant='pageTitleDescription' sx={sx.subTitle}>BEGIN YOUR JOURNEY INTO BETWIXT</Typography>
+      <Typography variant='pageTitleDescription' sx={sx.subTitle} style={{color: '#594569'}}>BEGIN YOUR JOURNEY INTO BETWIXT</Typography>
       <Button variant='grayButton' onClick={handleConnection}>Connect Wallet</Button>
     </Box>
   )

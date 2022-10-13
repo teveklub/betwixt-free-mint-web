@@ -47,6 +47,7 @@ const Success = ({
   image,
   counterDate,
   salesOver,
+  failed,
   // handleOnclick,handleReveal
 }) => {
   const shareOnTwitter = () => {
@@ -56,28 +57,60 @@ const Success = ({
     <Box sx={sx.root}>
       {!salesOver ? (
         <>
-          <Typography variant="pageTitleDescription" color="#62A077">
-            Success
-          </Typography>
-          <Box sx={sx.imageHolder}>
-            <img src={image} alt="mask" />
-          </Box>
-          <Button sx={sx.button} variant="grayButton" onClick={shareOnTwitter}>
-            Share on Twitter
-          </Button>
-          {/* <Button sx={sx.button} variant='grayButton' onClick={handleReveal}>{buttonText}</Button> */}
-          <Typography sx={sx.comeBackText} variant="pageTitleDescription">
-            {" "}
-            COME BACK FOR THE BURN EVENT
-          </Typography>
-          <Typography variant="pageTitleDescription">
-            {" "}
-            TO EXPEREINCE THE BETWIXT GAME
-          </Typography>
-          <Counter date={counterDate} />{" "}
+          {!failed ? (
+            <>
+              <Typography variant="pageTitleDescription" color="#62A077">
+                Success
+              </Typography>
+              <Box sx={sx.imageHolder}>
+                <img src={image} alt="mask" />
+              </Box>
+              <Button
+                sx={sx.button}
+                variant="grayButton"
+                onClick={shareOnTwitter}
+              >
+                Share on Twitter
+              </Button>
+              {/* <Button sx={sx.button} variant='grayButton' onClick={handleReveal}>{buttonText}</Button> */}
+              <Typography sx={sx.comeBackText} variant="pageTitleDescription">
+                {" "}
+                COME BACK FOR THE BURN EVENT
+              </Typography>
+              <Typography variant="pageTitleDescription">
+                {" "}
+                TO EXPEREINCE THE BETWIXT GAME
+              </Typography>
+              <Counter date={counterDate} />{" "}
+            </>
+          ) : (
+            <>
+              <Typography variant="pageTitleDescription" color="#7f2020">
+                Failed
+              </Typography>
+              <Box sx={sx.imageHolder}>
+                <img src={image} alt="mask" />
+              </Box>
+              <Typography sx={sx.comeBackText} variant="pageTitleDescription">
+                {" "}
+                COME BACK FOR THE BURN EVENT
+              </Typography>
+              <Typography variant="pageTitleDescription">
+                {" "}
+                TO EXPEREINCE THE BETWIXT GAME
+              </Typography>
+              <Counter date={counterDate} />{" "}
+            </>
+          )}
         </>
       ) : (
         <>
+          <Typography
+            variant="pageTitleDescription"
+            style={{ marginBottom: "25px", fontSize: "20px" }}
+          >
+            SALE ENDED
+          </Typography>
           <Typography sx={sx.comeBackText} variant="pageTitleDescription">
             {" "}
             COME BACK FOR THE BURN EVENT
