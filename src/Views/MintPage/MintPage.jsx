@@ -553,9 +553,14 @@ const MintPage = () => {
             </>
           )}
           {mainSaleStarted ? (
-            <Typography variant="pageTitleDescription" sx={sx.subTitle}>
-             Public mint started
+            <>
+            <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{marginBottom: '10px'}}>
+             Public mint: 
             </Typography>
+             <Typography variant="pageTitleDescription" sx={sx.subTitle} style={{backgroundColor: '#594569', padding: '17px 20px', marginBottom: '40px', width: '140px', marginTop: '15px', fontSize: '18px'}}>
+             started
+           </Typography>
+           </>
           ) : (
             <Box sx={{ textAlign: 'center' }}>
              {preSaleStarted && !mainSaleFinished && (
@@ -587,7 +592,7 @@ const MintPage = () => {
               </Button>
             </>
           )}
-          {!mainSaleStarted && !preSaleStarted && !mainSaleFinished && !preSaleFinished &&
+          {/* {!mainSaleStarted && !preSaleStarted && !mainSaleFinished && !preSaleFinished &&
           <>
           <Typography
           variant="pageTitleDescription"
@@ -597,7 +602,7 @@ const MintPage = () => {
           Mint is not started yet!
         </Typography>
         </>
-          }
+          } */}
           {/* {showErrorPopup 
           &&  <Typography variant="pageTitleDescription" sx={sx.subTitle}>
           userParams error

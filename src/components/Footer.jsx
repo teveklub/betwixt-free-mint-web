@@ -39,9 +39,10 @@ const sx = {
     text: {
         whiteSpace:"no-wrap",
         textTransform:"uppercase",
-        font: 'Jotia-Regular',
+        fontFamily: 'Jotia-Regular',
         color: '#FFF',
         fontSize: '12px',
+        opacity: '60%',
         [BP2]: {
             fontSize: '10px',
         }
