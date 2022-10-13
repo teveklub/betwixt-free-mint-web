@@ -38,7 +38,9 @@ const dev = {
     PHOENIX_CONTRACT_ADDRESS: '0x55B3154Ad761405B0cdd27355943Eb808d40b5A1',
 
     CROSSMINT_CLIENT_ID: 'b3f5189b-66fe-43d7-8295-c73f9fa3e3ef',
-    CROSSMINT_ENV: ''
+    CROSSMINT_ENV: '',
+    SALE_CONTRACT: '0x730d2d827FE32073b8ca5bdA74a921E4492EeFEB',
+    TOKEN_CONTRACT: '0x2a3Bc72ed71DB2a27Cfe2Ba50aEcC692Fb04FcfF'
   
   };
   
@@ -48,7 +50,7 @@ const dev = {
   
   // if use npm/yarn start,  NODE_ENV = "development"
   // if use npm/yarn build,  NODE_ENV = "production"
-  let envConfig = dev; // process.env.NODE_ENV === "development" ? dev : prod
+  let envConfig = prod; // process.env.NODE_ENV === "development" ? dev : prod
   let config = { ...envConfig, ...common };
   
   export default config;
