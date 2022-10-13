@@ -24,7 +24,7 @@ const dev = {
     DEPLOYED_CHAIN_ID: 1,
     INFURA_ID: 'a5e79e6ee9a14236b385e47849805596',
     FORTMATIC_KEY: 'pk_live_FBFF1F05F2879F29',
-    RPC_URL: 'https://mainnet.infura.io/v3/0a0bbd3ce4ea4be5ad706514cf2cd8cc',
+    RPC_URL: 'https://morning-dawn-night.quiknode.pro/11200b9a0f021eb0e380b0f273424505379b271d/',
     ETHERSCAN_URL: 'https://etherscan.io/',
     OPENSEA_URL: 'https://opensea.io/',
   
