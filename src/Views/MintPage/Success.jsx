@@ -51,7 +51,7 @@ const Success = ({
   // handleOnclick,handleReveal
 }) => {
   const shareOnTwitter = () => {
-    toast.success("Share on Twitter");
+    window.open("https://twitter.com/intent/tweet?text=I've%20just%20minted%20a%20Betwixt%20Brave!%20Mint%20yours%20braves.betwixt.life%20@BetwixtNFT")
   };
   return (
     <Box sx={sx.root}>

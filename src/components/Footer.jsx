@@ -37,6 +37,7 @@ const sx = {
         }
     },
     text: {
+        whiteSpace:"no-wrap",
         textTransform:"uppercase",
         font: 'Jotia-Regular',
         color: '#FFF',
