@@ -42,7 +42,7 @@ const sx = {
     }
 }
 
-const Counter = ({ date }) => {
+const Counter = ({ date, handleCountingOver }) => {
     const [values, setValues] = useState(INIT)
 
     useEffect(() => {
@@ -59,6 +59,7 @@ const Counter = ({ date }) => {
                 } else {
                     setValues(INIT);
                     clearInterval(interval);
+                    handleCountingOver();
                     // if (onFinish) {
                     //     onFinish()
                     // }

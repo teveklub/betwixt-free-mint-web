@@ -53,7 +53,7 @@ const CheckoutModal = ({
         )}
         {!isPresale && (
           <MintQuantity
-            price={Number(salePrice)}
+            price={salePrice}
             maxAmount={1}
             onClickMint={mintSale}
           />

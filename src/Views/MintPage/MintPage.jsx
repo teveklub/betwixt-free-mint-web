@@ -74,7 +74,6 @@ const MintPage = () => {
 
   const [presaleTimeCounter, setPresaleTimeCounter] = useState(null);
   const [saleTimeCounter, setSaleTimeCounter] = useState(null);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [txEtherScan, setTxEtherScan] = useState('');
@@ -93,7 +92,7 @@ const MintPage = () => {
   const [userMaxDiscountMintable, setUserMaxDiscountMintable] = useState(0);
   const [maxMintPerTransaction, setMaxMintPerTransaction] = useState(1);
   const [refreshInterval, setRefreshInterval] = useState(null);
-
+  const [counintingOver,setCountingOver]= useState(0);
   const [signatures, setSignatures] = useState(null);
 
   useEffect(() => {
@@ -184,7 +183,7 @@ const MintPage = () => {
       // const presaleIn5 = await setPresaleIn(signer);
       // console.log(presaleIn5, " presaleIn5")
     })();
-  }, []);
+  }, [counintingOver]);
 
   const getUserParams = () => {
     let up = null;
@@ -234,11 +233,16 @@ const MintPage = () => {
       .catch((e) => console.log('err:', e));
     console.log('****info', info);
 
+    
+    
     const totalSupply = await tokenContract.totalSupply();
     //console.log('TS',totalSupply);
 
+    // let time = 1665648120;
     const presaleStart = Number(info.config.presaleStart);
+    // const presaleStart = Number(info.config.presaleStart);
     const presaleEnd = Number(info.config.presaleEnd);
+    
     const saleStart = Number(info.config.saleStart);
     const saleEnd = Number(info.config.saleEnd);
 
@@ -440,6 +444,7 @@ const MintPage = () => {
       // });
       // let receipt = await resTwo.getReceipt();
       if (res) {
+        console.log(res, " ressss 443")
         setTxInProgress(false);
         getSaleInfo();
         setActiveTab(2); //-> wallet
@@ -462,13 +467,15 @@ const MintPage = () => {
     if (tx) {
       setTxEtherScan(`${config.ETHERSCAN_URL}/tx/${tx.hash}`);
       setTxInProgress(true);
-      await tx.wait().catch((e) => {
+      await tx.wait().then(()=>{
+        setTxInProgress(false);
+        getSaleInfo();
+        setActiveTab(2);
+      }).catch((e) => {
         handleError(e);
         setTxInProgress(false);
-      });
-      setTxInProgress(false);
-      getSaleInfo();
-      setActiveTab(2);
+      })
+      
       // localStorage.setItem('activeTab', 1);
     }
   };
@@ -485,6 +492,9 @@ const MintPage = () => {
       console.log(e.reason);
     }
   };
+  const handleCountingOver = () =>{
+    setCountingOver((value)=> value+1)
+  }
   return (
     <Box className="center-div" sx={sx.root}>
       {activeTab > 0 && (
@@ -527,7 +537,7 @@ const MintPage = () => {
                   >
                     Whitelist mint starts in :
                   </Typography>
-                  <Counter date={presaleTimeCounter} />
+                  <Counter date={presaleTimeCounter} handleCountingOver={handleCountingOver}/>
                   <br />
                 </>
               )}
@@ -544,7 +554,7 @@ const MintPage = () => {
                   <Typography variant="pageTitleDescription" sx={sx.subTitle}>
                   Public mint starts in :
                   </Typography>
-                  <Counter date={saleTimeCounter} />
+                  <Counter date={saleTimeCounter} handleCountingOver={handleCountingOver} />
                 </>
               )}
               <br />
@@ -607,11 +617,11 @@ const MintPage = () => {
           <Success counterDate={date} image={maskImage} />
         </>
       )}
-      {activeTab !== 2 && !txInProgress && !approveInProgress && !mainSaleFinished && ! preSaleFinished &&  (
+      {/* {activeTab === 2 && !txInProgress && !approveInProgress && !mainSaleFinished && ! preSaleFinished &&  (
         <>
           <Success counterDate={date} image={maskImage} failed/>
         </>
-      )}
+      )} */}
 
       <TxProgressModal isOpen={txInProgress} txEtherScan={txEtherScan} />
     </Box>
