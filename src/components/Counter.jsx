@@ -15,7 +15,8 @@ const sx = {
         display: 'flex',
         justifyContent: 'center',
         gap: '35px',
-        mt: '20px'
+        mt: '20px',
+        mb: '40px'
     },
     counterBox: {
         display: 'flex',
@@ -42,7 +43,7 @@ const sx = {
     }
 }
 
-const Counter = ({ date, handleCountingOver }) => {
+const Counter = ({ date, handleCountingOver, simple }) => {
     const [values, setValues] = useState(INIT)
 
     useEffect(() => {
@@ -75,11 +76,19 @@ const Counter = ({ date, handleCountingOver }) => {
     }, [date]);
 
     return (
-        <Box sx={sx.counterBoxHolder}>
+        <>
+        {simple ? (
+          <>
+              {values.d} days, {values.h} hours, {values.m} mins
+          </>
+        ) : (
+          <Box sx={sx.counterBoxHolder}>
             <CounterCircle name="DAYS" value={values.d} />
             <CounterCircle name="HOURS" value={values.h} />
             <CounterCircle name="MINS" value={values.m} />
-        </Box>
+          </Box>
+        )}
+      </>
     );
 };
 

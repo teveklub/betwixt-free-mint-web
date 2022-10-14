@@ -5,6 +5,7 @@ import GalaxisLogo from '../assets/images/logos/Galaxis.svg'
 import CamelCodingLogo from '../assets/images/logos/CC.svg'
 
 const BP1 = '@media (max-width: 550px)';
+const BP2 = '@media (max-width: 350px)';
 const sx = {
     root: {
         position: 'relative',
@@ -29,15 +30,22 @@ const sx = {
         '& img': {
             maxHeight: '32px',
             height: '100%',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            [BP2]: {
+                maxHeight: '28px',
+            }
         }
     },
     text: {
+        whiteSpace:"no-wrap",
         textTransform:"uppercase",
-        font: 'Jotia-Regular',
+        fontFamily: 'Jotia-Regular',
         color: '#FFF',
         fontSize: '12px',
-
+        opacity: '60%',
+        [BP2]: {
+            fontSize: '10px',
+        }
     }
 }
 const Footer = () => {

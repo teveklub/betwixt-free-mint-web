@@ -33,7 +33,7 @@ const sx = {
     mb: "50px",
   },
   comeBackText: {
-    fontSize: "20px",
+    fontSize: '24px',
     lineHeight: "24px",
     mb: "14px",
     [BP1]: {
@@ -41,6 +41,10 @@ const sx = {
       lineHeight: "20px",
     },
   },
+  toExperienceText: {
+    fontSize: '14px', 
+    color: '#594569'
+  }
 };
 
 const Success = ({
@@ -51,7 +55,7 @@ const Success = ({
   // handleOnclick,handleReveal
 }) => {
   const shareOnTwitter = () => {
-    toast.success("Share on Twitter");
+    window.open("https://twitter.com/intent/tweet?text=I've%20just%20minted%20a%20Betwixt%20Brave!%20Mint%20yours%20braves.betwixt.life%20@BetwixtNFT")
   };
   return (
     <Box sx={sx.root}>
@@ -77,7 +81,7 @@ const Success = ({
                 {" "}
                 COME BACK FOR THE BURN EVENT
               </Typography>
-              <Typography variant="pageTitleDescription">
+              <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
                 {" "}
                 TO EXPEREINCE THE BETWIXT GAME
               </Typography>
@@ -95,7 +99,7 @@ const Success = ({
                 {" "}
                 COME BACK FOR THE BURN EVENT
               </Typography>
-              <Typography variant="pageTitleDescription">
+              <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
                 {" "}
                 TO EXPEREINCE THE BETWIXT GAME
               </Typography>
@@ -107,7 +111,7 @@ const Success = ({
         <>
           <Typography
             variant="pageTitleDescription"
-            style={{ marginBottom: "25px", fontSize: "20px" }}
+            style={{ marginBottom: "50px", fontSize: "18px" }}
           >
             SALE ENDED
           </Typography>
@@ -115,7 +119,7 @@ const Success = ({
             {" "}
             COME BACK FOR THE BURN EVENT
           </Typography>
-          <Typography variant="pageTitleDescription">
+          <Typography variant="pageTitleDescription" sx={sx.toExperienceText}>
             {" "}
             TO EXPEREINCE THE BETWIXT GAME
           </Typography>
